@@ -7,5 +7,6 @@ namespace HealthcareManagementSystem.Models
 {
     public class Class2
     {
+        //test edit By rakesh
     }
 }
