@@ -7,5 +7,9 @@ namespace HealthcareManagementSystem.Models
 {
     public class Class4
     {
+        static void Main()
+        {
+
+        }
     }
 }
