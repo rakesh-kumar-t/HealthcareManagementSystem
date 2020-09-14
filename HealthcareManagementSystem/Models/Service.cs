@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HealthcareManagementSystem.Models
 {
-    public class Services
+    public class Service
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

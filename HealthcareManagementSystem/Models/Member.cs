@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthcareManagementSystem.Models
 {
-    public class Members
+    public class Member
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
