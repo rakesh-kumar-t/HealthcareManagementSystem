@@ -132,6 +132,7 @@
     <Compile Include="Controllers\**\*.cs" />
     <Compile Include="DrugHouse.cs" />
     <Compile Include="Models\**\*.cs" />
+    <Compile Include="Models\Pharmastock.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
