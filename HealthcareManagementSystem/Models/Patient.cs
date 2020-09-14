@@ -33,5 +33,10 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public DateTime Date { get; set; }
 
+        //foreign key referneces
+        public virtual Members Members{get;set;}
+
+        public virtual ICollection<Services> Services{get;set;}
+        public virtual ICollection<Pharmacy> Pharmacies{get;set;}
     }
 }

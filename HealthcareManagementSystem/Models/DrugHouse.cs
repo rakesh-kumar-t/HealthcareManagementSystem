@@ -22,5 +22,8 @@ namespace HealthcareManagementSystem.Models
         public int StockLeft { get; set; }
         [Required]
         public double Price { get; set; }
+
+        public virtual ICollection<Pharmastock> Pharmastocks{get;set;}
+
     }
 }

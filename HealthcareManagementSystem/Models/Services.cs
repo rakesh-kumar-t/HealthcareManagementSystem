@@ -28,6 +28,8 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public double TotalAmount{ get; set; }
 
+        public virtual Patient Patients{get;set;}
+
 
 
 

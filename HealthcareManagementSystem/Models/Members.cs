@@ -29,5 +29,8 @@ namespace HealthcareManagementSystem.Models
         [Required]
         [Display(Name="Category")]
         public string Type { get; set; }
+
+        //Foreign Key reference
+        public virtual ICollection<Patient> Patients{get;set;}
     }
 }

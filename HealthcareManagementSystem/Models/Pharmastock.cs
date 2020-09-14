@@ -24,5 +24,9 @@ namespace HealthcareManagementSystem.Models
         public DateTime Dateadded { get; set; }
         [Required]
         public double Price { get; set; }
+
+        public virtual DrugHouse DrugHouses{get;set;}
+
+        public virtual ICollection<Pharmacy> Pharmacies{get;set;}
     }
 }
