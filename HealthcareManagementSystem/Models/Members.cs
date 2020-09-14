@@ -25,6 +25,7 @@ namespace HealthcareManagementSystem.Models
         public string Spouse { get; set; }
         public string Child1 { get; set; }
         public string Child2 { get; set; }
+        [Required]
         [Display(Name="Category")]
         public string Type { get; set; }
     }
