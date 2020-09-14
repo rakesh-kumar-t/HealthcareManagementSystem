@@ -130,7 +130,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\**\*.cs" />
-    <Compile Include="DrugHouse.cs" />
     <Compile Include="Models\**\*.cs" />
     <Compile Include="Models\Pharmastock.cs" />
     <Compile Include="Models\**\*.cs" />
