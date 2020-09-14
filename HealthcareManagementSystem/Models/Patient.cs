@@ -12,8 +12,7 @@ namespace HealthcareManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PId { get; set; }
-
-        [Key]
+        [Required]
         public int Opno { get; set; }
 
         [Required(ErrorMessage = "Enter the  patient name.")]
@@ -33,7 +32,7 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public DateTime Date { get; set; }
 
-        //foreign key referneces
+        //foreign key references
         public virtual Member Members{get;set;}
 
         public virtual ICollection<Service> Services{get;set;}

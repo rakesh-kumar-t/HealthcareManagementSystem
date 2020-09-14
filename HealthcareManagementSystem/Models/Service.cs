@@ -12,9 +12,8 @@ namespace HealthcareManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [Key]
-        public int Pid { get; set; }
+        [Required]
+        public int PId { get; set; }
         
         [Required]
         public string TestName { get; set; }
