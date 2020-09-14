@@ -22,5 +22,7 @@ namespace HealthcareManagementSystem.Models
         public DateTime Expiry { get; set; }
         [Required]
         public DateTime Dateadded { get; set; }
+        [Required]
+        public double Price { get; set; }
     }
 }

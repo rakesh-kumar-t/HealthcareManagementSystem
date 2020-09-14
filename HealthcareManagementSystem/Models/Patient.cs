@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace HealthcareManagementSystem.Models
     public class Patient
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Key]
@@ -26,7 +28,7 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public string Disease { get; set; }
 
-        public float BillAmount { get; set; }
+        public double BillAmount { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

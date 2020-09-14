@@ -10,7 +10,8 @@ namespace HealthcareManagementSystem.Models
     public class Members
     {
         [Key]
-        public int opno { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Opno { get; set; }
         [Required(ErrorMessage ="Enter the name.")]
         public string Name { get; set; }
         [Required]
