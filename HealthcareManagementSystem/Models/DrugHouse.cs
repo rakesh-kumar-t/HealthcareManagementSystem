@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HealthcareManagementSystem
+namespace HealthcareManagementSystem.Models
 {
     public class DrugHouse
     {
@@ -13,6 +13,5 @@ namespace HealthcareManagementSystem
         public DateTime ExpiryDate { get; set; }
         public int StockLeft { get; set; }
         public double Price { get; set; }
-        
-    } 
+    }
 }
