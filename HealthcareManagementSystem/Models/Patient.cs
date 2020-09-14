@@ -11,7 +11,7 @@ namespace HealthcareManagementSystem.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int PId { get; set; }
 
         [Key]
         public int Opno { get; set; }

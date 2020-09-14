@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,8 @@ namespace HealthcareManagementSystem.Models
     public class Services
     {
         [Key]
-        public int id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
         [Key]
         public int Pid { get; set; }
@@ -21,10 +23,10 @@ namespace HealthcareManagementSystem.Models
         public int Quantity { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public double Price { get; set; }
 
         [Required]
-        public float TotalAmount{ get; set; }
+        public double TotalAmount{ get; set; }
 
 
 

@@ -8,7 +8,7 @@ namespace HealthcareManagementSystem.Models
 {
     public class Pharmacy
     {
-        public int PatientId { get; set; }//from Patient
+        public int PId { get; set; }//from Patient
         public int PatientName { get; set; }//from Patient
         public string Type { get; set; }//Category from Members
         public string MedId { get; set; }
