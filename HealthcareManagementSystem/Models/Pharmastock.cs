@@ -17,7 +17,7 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public int Stockleft { get; set; }
         [Required]
-        public int DrugId { get; set; }//should be foregin key
+        public int DrugId { get; set; }//Foreign key from drugstore
         [Required]
         public DateTime Expiry { get; set; }
         [Required]
@@ -25,6 +25,7 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public double Price { get; set; }
 
+        //Foreign Key references
         public virtual DrugHouse DrugHouses{get;set;}
 
         public virtual ICollection<Pharmacy> Pharmacies{get;set;}

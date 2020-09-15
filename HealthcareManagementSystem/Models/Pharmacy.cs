@@ -15,7 +15,7 @@ namespace HealthcareManagementSystem.Models
         public int PId { get; set; }//from Patient
         public string PatientName { get; set; }//from Patient
         public string Type { get; set; }//Category from Members
-        public string PharmId { get; set; }
+        public int PharmId { get; set; }//foreign key from Pharmacy
         [Required]
         public string MedName { get; set; }
         [Required]
@@ -23,6 +23,7 @@ namespace HealthcareManagementSystem.Models
         [Required]
         public double Price { get; set; }
 
+        //Foreign key references
         public virtual Pharmastock Pharmastocks{get;set;}
         public virtual Patient Patients{get;set;}
 
