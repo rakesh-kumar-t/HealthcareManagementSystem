@@ -9,9 +9,9 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    <div class="d-flex justify-content-center h-100 mt-4">
+    <div class="d-flex justify-content-center h-100 mt-3">
         <div class="user_card mt-5">
-                <h4 class="text-center">Login Here</h4>
+                <h4 class="text-center text-black-50">LOGIN</h4>
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
                     <img src="~/Images/Logo.jpg" class="brand_logo" alt="Logo">
@@ -37,6 +37,7 @@
                 <div class="d-flex justify-content-center mt-3 login_container">
                         <input type="submit" value="Login" class="btn btn-success login_btn" />
                 </div>
+                <div class="mt-2">@Html.ActionLink("New User?","Contact",null,new { @class=""}) </div>
         </div>
     </div>
 }
