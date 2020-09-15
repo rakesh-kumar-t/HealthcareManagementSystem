@@ -81,14 +81,6 @@ namespace HealthcareManagementSystem.Controllers
                 return View();
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Admin()
-        {
-            string role = Session["Role"].ToString();
-            if (role == "Admin")
-                return View();
-            return RedirectToAction("Index", "Home");
-        }
-
 
         public ActionResult About()
         {
@@ -127,11 +119,13 @@ namespace HealthcareManagementSystem.Controllers
             return clearText;
         }
         //NewPatient 
+        [Authorize]
         public ActionResult NewPatient()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public ActionResult NewPatient(Patient pt)
         {
             if(ModelState.IsValid)
