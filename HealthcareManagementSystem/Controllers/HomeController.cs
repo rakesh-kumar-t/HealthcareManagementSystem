@@ -31,6 +31,29 @@ namespace HealthcareManagementSystem.Controllers
             }
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Reception Recept)
+        {
+            Recept.Password = encrypt(Recept.Password);
+            var reception = db.Receptions.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
+            if(reception!=null)
+            {
+                System.Web.Security.FormsAuthentication.SetAuthCookie(Recept.UserId,false);
+                Session["UserId"] = reception.UserId.ToString();
+                Session["Name"] = reception.Name.ToString();
+                Session["Role"] = reception.Role.ToString();
+                if (reception.Role == "Admin")
+                    return RedirectToAction("Index", "Admin");
+                else
+                    return RedirectToAction("Index", "Home");
+            }
+            else
+            { 
+                ModelState.AddModelError("", "Invalid credentials"); 
+            }
+            return View(reception);
+        }
 
         public ActionResult About()
         {
