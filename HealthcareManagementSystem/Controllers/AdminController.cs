@@ -7,6 +7,8 @@ using HealthcareManagementSystem.Models;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
+using System.Web.Security;
+
 
 namespace HealthcareManagementSystem.Controllers
 {
@@ -26,6 +28,7 @@ namespace HealthcareManagementSystem.Controllers
             var admin = db.Admins.Where(a =>a.UserId.Equals(adm.UserId) && a.Password.Equals(adm.Password)).FirstOrDefault();
             if(admin!=null)
             {
+                FormsAuthentication.SetAuthCookie(admin.UserId, false);
                 Session["UserId"] = admin.UserId.ToString();
                 Session["Name"] = admin.Name.ToString();
                 Session["Role"] = admin.Role.ToString();

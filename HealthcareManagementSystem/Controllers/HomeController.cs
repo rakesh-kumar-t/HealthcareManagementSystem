@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 
 namespace HealthcareManagementSystem.Controllers
@@ -40,7 +41,7 @@ namespace HealthcareManagementSystem.Controllers
             var reception = db.Receptions.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
             if(reception!=null)
             {
-                System.Web.Security.FormsAuthentication.SetAuthCookie(Recept.UserId,false);
+                FormsAuthentication.SetAuthCookie(Recept.UserId,false);
                 Session["UserId"] = reception.UserId.ToString();
                 Session["Name"] = reception.Name.ToString();
                 Session["Role"] = reception.Role.ToString();
