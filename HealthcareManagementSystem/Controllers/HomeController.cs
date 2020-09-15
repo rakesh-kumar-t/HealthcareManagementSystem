@@ -76,14 +76,19 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult Reception()
         {
-            
             string role = Session["Role"].ToString();
             if (role == "Reception")
                 return View();
             return RedirectToAction("Index", "Home");
-
-
         }
+        public ActionResult Admin()
+        {
+            string role = Session["Role"].ToString();
+            if (role == "Admin")
+                return View();
+            return RedirectToAction("Index", "Home");
+        }
+
 
         public ActionResult About()
         {
