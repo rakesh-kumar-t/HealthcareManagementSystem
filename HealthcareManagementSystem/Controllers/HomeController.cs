@@ -121,6 +121,16 @@ namespace HealthcareManagementSystem.Controllers
             }
             return clearText;
         }
+
+        //User Logout action
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index");
+        }
         //Dispose the database
         protected override void Dispose(bool disposing)
         {
