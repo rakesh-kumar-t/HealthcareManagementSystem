@@ -13,7 +13,7 @@ namespace HealthcareManagementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleId{get;set;}
         [Required]
-        public string Role{get;set;}
+        public string RoleName{get;set;}
 
         //Foreign Key references
         public virtual ICollection<User> Users{get;set;}

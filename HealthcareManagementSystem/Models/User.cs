@@ -23,7 +23,7 @@ namespace HealthcareManagementSystem.Models
         [DataType(DataType.Password)]
         public string Confirmpassword { get; set; }
         [Required]
-        public string Role { get; set; }
+        public int RoleId { get; set; }
 
         //Foreign key references
         public virtual Role Roles{get;set;}
