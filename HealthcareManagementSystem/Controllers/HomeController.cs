@@ -126,6 +126,11 @@ namespace HealthcareManagementSystem.Controllers
             }
             return clearText;
         }
+        //NewPatient 
+        public ActionResult NewPatient()
+        {
+            return View();
+        }
 
         //User Logout action
         [Authorize]
