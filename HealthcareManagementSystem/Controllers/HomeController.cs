@@ -136,6 +136,10 @@ namespace HealthcareManagementSystem.Controllers
             }
             return View(pt);
         }
+        public ActionResult ViewPatient()
+        {
+            return View(db.Patients.ToList());
+        }
 
         //User Logout action
         [Authorize]
