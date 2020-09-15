@@ -9,15 +9,14 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    <div class="d-flex justify-content-center h-100 mt-5">
-        <div class="user_card">
+    <div class="d-flex justify-content-center h-100 mt-4">
+        <div class="user_card mt-5">
                 <h4 class="text-center">Login Here</h4>
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
-                    <img src="" class="brand_logo" alt="Logo">
+                    <img src="~/Images/Logo.jpg" class="brand_logo" alt="Logo">
                 </div>
             </div>
-            <div class="d-flex justify-content-center form_container">
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="input-group mb-lg-5">
@@ -37,20 +36,13 @@
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
                 <br />
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
+                <div class="d-flex justify-content-center mt-3 login_container">
+                        <input type="submit" value="Login" class="btn btn-success" />
                 </div>
-            </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
