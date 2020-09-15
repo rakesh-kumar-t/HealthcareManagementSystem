@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthcareManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,11 @@ namespace HealthcareManagementSystem.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult ViewPharmacy()
+        {
+            HealthCareContext db = new HealthCareContext();
+            return View(db.Pharmastocks.ToList());
         }
     }
 }
