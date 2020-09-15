@@ -131,6 +131,17 @@ namespace HealthcareManagementSystem.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult NewPatient(Patient pt)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Patients.Add(pt);
+                db.SaveChanges();
+                return RedirectToAction("Reception");
+            }
+            return View(pt);
+        }
 
         //User Logout action
         [Authorize]
