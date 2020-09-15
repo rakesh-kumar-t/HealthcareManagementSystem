@@ -44,9 +44,15 @@ namespace HealthcareManagementSystem.Controllers
                 FormsAuthentication.SetAuthCookie(Recept.UserId,false);
                 Session["UserId"] = reception.UserId.ToString();
                 Session["Name"] = reception.Name.ToString();
-                Session["Role"] = reception.Role.ToString();
-                if (reception.Role == "Admin")
+                Session["Role"] = reception.Roles.RoleName.ToString();
+                if (Session["Role"] == "Admin")
                     return RedirectToAction("Index", "Admin");
+                else if (Session["Role"] == "Manager")
+                    return RedirectToAction("Index", "Admin");
+                else if (Session["Role"] == "Nurse")
+                    return RedirectToAction("Index", "Home");
+                else if (Session["Role"] == "Pharmacy")
+                    return RedirectToAction("Index", "Home");
                 else
                     return RedirectToAction("Index", "Home");
             }
