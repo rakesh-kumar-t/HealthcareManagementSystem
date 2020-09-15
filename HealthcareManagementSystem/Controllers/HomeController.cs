@@ -33,7 +33,7 @@ namespace HealthcareManagementSystem.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Reception Recept)
+        public ActionResult Index(Reception Recept)
         {
             Recept.Password = encrypt(Recept.Password);
             var reception = db.Receptions.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
@@ -52,7 +52,7 @@ namespace HealthcareManagementSystem.Controllers
             { 
                 ModelState.AddModelError("", "Invalid credentials"); 
             }
-            return View(reception);
+            return View(Recept);
         }
 
         public ActionResult About()
