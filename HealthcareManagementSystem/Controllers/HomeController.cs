@@ -24,7 +24,7 @@ namespace HealthcareManagementSystem.Controllers
             {
                 //Add admin role in Role Table
                 var RoleTable = db.Roles.ToList();
-                if (RoleTable.Count == 0)
+                if (RoleTable.ToList().Count == 0)
                 {
                     Role adm = new Role();
                     adm.RoleName = "Admin";
