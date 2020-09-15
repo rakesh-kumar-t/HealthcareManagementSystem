@@ -73,6 +73,18 @@ namespace HealthcareManagementSystem.Controllers
             return View(Recept);
         }
 
+        [Authorize]
+        public ActionResult Reception()
+        {
+            
+            string role = Session["Role"].ToString();
+            if (role == "Reception")
+                return View();
+            return RedirectToAction("Index", "Home");
+
+
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
