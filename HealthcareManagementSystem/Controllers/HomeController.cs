@@ -45,13 +45,14 @@ namespace HealthcareManagementSystem.Controllers
                 Session["UserId"] = reception.UserId.ToString();
                 Session["Name"] = reception.Name.ToString();
                 Session["Role"] = reception.Roles.RoleName.ToString();
-                if (Session["Role"] == "Admin")
+                string role = Session["Role"].ToString();
+                if (role == "Admin")
                     return RedirectToAction("Index", "Admin");
-                else if (Session["Role"] == "Manager")
+                else if (role == "Manager")
                     return RedirectToAction("Index", "Admin");
-                else if (Session["Role"] == "Nurse")
+                else if (role == "Nurse")
                     return RedirectToAction("Index", "Home");
-                else if (Session["Role"] == "Pharmacy")
+                else if (role == "Pharmacy")
                     return RedirectToAction("Index", "Home");
                 else
                     return RedirectToAction("Index", "Home");
