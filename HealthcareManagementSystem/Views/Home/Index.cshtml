@@ -19,25 +19,23 @@
             </div>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="input-group mb-lg-5">
+                <div class="input-group mb-3">
                     <div class="input-group-append">
-                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <span class="input-group-text"><i class="fa fa-user-circle-o"></i></span>
                     </div>
                         @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control input_user", @placeholder="UserId" } })
                         @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
                 </div>
-                <br />
 
-                <div class="input-group mb-2">
+                <div class="input-group mb-3">
                     <div class="input-group-append">
                         <span class="input-group-text"><i class="fa fa-key"></i></span>
                     </div>
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control input_pass", @placeholder = "Password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
-                <br />
                 <div class="d-flex justify-content-center mt-3 login_container">
-                        <input type="submit" value="Login" class="btn btn-success" />
+                        <input type="submit" value="Login" class="btn btn-success login_btn" />
                 </div>
         </div>
     </div>

@@ -41,18 +41,18 @@ textarea {
 
 .brand_logo_container {
     position: absolute;
-    height: 170px;
-    width: 170px;
-    top: -75px;
+    height: 100px;
+    width: 100px;
+    top: -50px;
     border-radius: 50%;
     background: #60a3bc;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 
 .brand_logo {
-    height: 150px;
-    width: 150px;
+    height: 90px;
+    width: 90px;
     border-radius: 50%;
     border: 2px solid white;
 }
@@ -63,28 +63,31 @@ textarea {
 
 .login_btn {
     width: 100%;
-    background: #c0392b !important;
     color: white !important;
+    background-color:lightseagreen;
 }
 
-    .login_btn:focus {
-        box-shadow: none !important;
-        outline: 0px !important;
-    }
+.login_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
 
 .login_container {
     padding: 0 2rem;
 }
 
 .input-group-text {
-    background: #c0392b !important;
+    background: #212121 !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;
 }
 
 .input_user,
+.input_pass,
 .input_pass:focus {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
     box-shadow: none !important;
     outline: 0px !important;
     max-width: 280px;
