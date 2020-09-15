@@ -26,6 +26,7 @@ namespace HealthcareManagementSystem.Models
 
         [Required]
         public double TotalAmount{ get; set; }
+        public DateTime Date { get; set; }
 
         public virtual Patient Patients{get;set;}
 

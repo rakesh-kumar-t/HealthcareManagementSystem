@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthcareManagementSystem.Models
 {
-    public class Admin
+    public class User
     {
         [Key]
         public string UserId { get; set; }
@@ -24,5 +24,8 @@ namespace HealthcareManagementSystem.Models
         public string Confirmpassword { get; set; }
         [Required]
         public string Role { get; set; }
+
+        //Foreign key references
+        public virtual Role Roles{get;set;}
     } 
 }

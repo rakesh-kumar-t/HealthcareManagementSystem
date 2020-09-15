@@ -20,35 +20,6 @@ namespace HealthcareManagementSystem.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(Admin adm )
-        {
-          adm .Password = HomeController.encrypt(adm.Password);
-            var admin = db.Admins.Where(a =>a.UserId.Equals(adm.UserId) && a.Password.Equals(adm.Password)).FirstOrDefault();
-            if(admin!=null)
-            {
-                FormsAuthentication.SetAuthCookie(admin.UserId, false);
-                Session["UserId"] = admin.UserId.ToString();
-                Session["Name"] = admin.Name.ToString();
-                Session["Role"] = admin.Role.ToString();
-                if(admin.Role=="Admin")
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid credentials");
-            }
-            return View(admin);
-           
-
-
-        }
+        
     }
 }

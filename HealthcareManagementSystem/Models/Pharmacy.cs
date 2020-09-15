@@ -22,6 +22,7 @@ namespace HealthcareManagementSystem.Models
         public string Quantity { get; set; }
         [Required]
         public double Price { get; set; }
+        public DateTime Date { get; set; }
 
         //Foreign key references
         public virtual Pharmastock Pharmastocks{get;set;}

@@ -19,26 +19,26 @@ namespace HealthcareManagementSystem.Controllers
         {
             string userid = "admin@demo.com";
             string password = "Admin@123";
-            var o = db.Admins.Where(u => u.UserId.Equals(userid)).FirstOrDefault();
+            var o = db.Users.Where(u => u.UserId.Equals(userid)).FirstOrDefault();
             if (o == null)
             {
-                Admin admin = new Admin();
+                User admin = new User();
                 admin.Name = "Adminname"; 
                 admin.UserId = userid;
                 admin.Password = encrypt(password);
                 admin.Confirmpassword = encrypt(password);
                 admin.Role = "Admin";
-                db.Admins.Add(admin);
+                db.Users.Add(admin);
                 db.SaveChanges();
             }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Reception Recept)
+        public ActionResult Index(User Recept)
         {
             Recept.Password = encrypt(Recept.Password);
-            var reception = db.Receptions.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
+            var reception = db.Users.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
             if(reception!=null)
             {
                 FormsAuthentication.SetAuthCookie(Recept.UserId,false);
