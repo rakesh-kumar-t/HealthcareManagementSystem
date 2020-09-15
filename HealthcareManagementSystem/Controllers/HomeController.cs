@@ -22,12 +22,21 @@ namespace HealthcareManagementSystem.Controllers
             var o = db.Users.Where(u => u.UserId.Equals(userid)).FirstOrDefault();
             if (o == null)
             {
+                //Add admin role in Role Table
+                var RoleTable = db.Roles.ToList();
+                if (RoleTable.Count == 0)
+                {
+                    Role adm = new Role();
+                    adm.RoleName = "Admin";
+                    db.Roles.Add(adm);
+                    db.SaveChanges();
+                }
                 User admin = new User();
                 admin.Name = "Adminname"; 
                 admin.UserId = userid;
                 admin.Password = encrypt(password);
                 admin.Confirmpassword = encrypt(password);
-                admin.Role = "Admin";
+                admin.RoleId = 1;
                 db.Users.Add(admin);
                 db.SaveChanges();
             }
