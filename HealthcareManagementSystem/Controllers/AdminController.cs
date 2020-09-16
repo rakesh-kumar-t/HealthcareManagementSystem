@@ -77,6 +77,26 @@ namespace HealthcareManagementSystem.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        [HttpPost]
+        public ActionResult NewUser(User user)
+        {
+            if(Session["Role"].ToString()=="Admin")
+            {
+                if(ModelState.IsValid)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }    
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Data Format.");
+                }
+                return View(user);
+            }
+            else
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
