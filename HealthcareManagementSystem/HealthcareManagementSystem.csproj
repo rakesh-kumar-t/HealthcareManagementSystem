@@ -293,6 +293,7 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\Admin\AddMember.cshtml" />
+    <Content Include="Views\Admin\ViewMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
