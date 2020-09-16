@@ -40,48 +40,54 @@
         </th>
         <th></th>
     </tr>
+@{
+    if (Model!=null)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mother)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Father)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Spouse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Child1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Child2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Opno }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Opno }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Opno })
-        </td>
-    </tr>
+        foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mother)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Father)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Spouse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Child1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Child2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Opno }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Opno }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Opno })
+            </td>
+        </tr>
+        }
+    }
+
 }
 
 </table>

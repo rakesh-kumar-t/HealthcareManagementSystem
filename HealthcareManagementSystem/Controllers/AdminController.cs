@@ -19,7 +19,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            if (Session["Role"].ToString() == "Admin")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
                 return View();
             else
                 return RedirectToAction("Index", "Home");
@@ -27,7 +27,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddMember()
         {
-            if (Session["Role"].ToString() == "Admin")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
                 return View();
             else
                 return RedirectToAction("Index", "Home");
