@@ -139,6 +139,25 @@ namespace HealthcareManagementSystem.Controllers
             }
         }
         [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(User usr)
+        {
+            usr.Password = HomeController.encrypt(usr.Password);
+            usr.Confirmpassword = HomeController.encrypt(usr.Confirmpassword);
+            string username = User.Identity.Name;
+            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+            user.Password = usr.Password;
+            user.Confirmpassword = usr.Confirmpassword;
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ChangePassword");
+        }
+        [Authorize]
         public ActionResult ViewStock()
         {
             if(Session["Role"].ToString()=="Manager")
