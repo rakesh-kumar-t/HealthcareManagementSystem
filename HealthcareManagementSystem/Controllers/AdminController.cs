@@ -69,9 +69,9 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult NewUser()
         {
-            if (Session["Role"].ToString() == "Admin")
+            if (Session["UserId"]!=null&&Session["Role"].ToString() == "Admin")
             {
-                ViewBag.Roles = new SelectList(db.Roles, "RoleId", "RoleName");
+                Session["Rolelist"] = new SelectList(db.Roles,"RoleId","RoleName");
                 return View();
             }
             else
@@ -79,12 +79,15 @@ namespace HealthcareManagementSystem.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult NewUser(User user)
+        public ActionResult NewUser([Bind(Include ="UserId,Name,RoleId")]User user)
         {
             if(Session["Role"].ToString()=="Admin")
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
+                    string password = "User@123";
+                    user.Password = HomeController.encrypt(password);
+                    user.Confirmpassword = HomeController.encrypt(password);
                     db.Users.Add(user);
                     db.SaveChanges();
                 }    
