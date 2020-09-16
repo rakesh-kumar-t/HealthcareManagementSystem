@@ -143,19 +143,19 @@ namespace HealthcareManagementSystem.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
-        //[Authorize]
-        //public ActionResult ViewReport()
-        //{
-        //    if (Session["Role"].ToString() == "Manager")
-        //    {
-        //        return View(db.DrugHouses.ToList());
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //}
-        
+        [Authorize]
+        public ActionResult ViewReport()
+        {
+            if (Session["Role"].ToString() == "Manager")
+            {
+                return View(db.Pharmacies.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
 
     }
 }
