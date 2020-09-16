@@ -40,7 +40,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddMember(Member member)
         {
-            if (Session["Role"].ToString() == "Admin")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 if (ModelState.IsValid)
                 {
@@ -60,7 +60,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public  ActionResult ViewMember(int? id)
         {
-            if (Session["Role"].ToString() == "Admin")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 if (id == null)
                 {
@@ -94,7 +94,7 @@ namespace HealthcareManagementSystem.Controllers
         [HttpPost]
         public ActionResult NewUser([Bind(Include ="UserId,Name,RoleId")]User user)
         {
-            if(Session["Role"].ToString()=="Admin")
+            if(Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 if (ModelState.IsValid)
                 {
@@ -120,7 +120,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult EditMember(int? id)
         {
-            if(Session["Role"].ToString()=="Admin")
+            if(Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 if(id==null)
                 {
@@ -141,26 +141,44 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(User usr)
         {
-            usr.Password = HomeController.encrypt(usr.Password);
-            usr.Confirmpassword = HomeController.encrypt(usr.Confirmpassword);
-            string username = User.Identity.Name;
-            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Password = usr.Password;
-            user.Confirmpassword = usr.Confirmpassword;
-            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("ChangePassword");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+                usr.Password = HomeController.encrypt(usr.Password);
+                usr.Confirmpassword = HomeController.encrypt(usr.Confirmpassword);
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+                if (user != null)
+                {
+                    user.Password = usr.Password;
+                    user.Confirmpassword = usr.Confirmpassword;
+                    db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "Password Changed Successfully";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Error adding the user";
+                }
+                return RedirectToAction("ChangePassword");
+            }
+            else
+                return RedirectToAction("Index", "Home");
         }
         [Authorize]
         public ActionResult ViewStock()
         {
-            if(Session["Role"].ToString()=="Manager")
+            if(Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 return View(db.DrugHouses.ToList());
             }
@@ -172,9 +190,8 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddStock()
         {
-            if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                Session["DrugStock"] = new SelectList(db.DrugHouses, "DrugId", "Name","ExpiryDate");
                 return View();
             }
             else
@@ -184,7 +201,7 @@ namespace HealthcareManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddStock(DrugHouse drug)
         {
-            if (Session["Role"].ToString() == "Manager")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 if (ModelState.IsValid)
                 {
@@ -203,7 +220,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult ViewReport()
         {
-            if (Session["Role"].ToString() == "Manager")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
                 return View(db.Pharmacies.ToList());
             }
@@ -214,5 +231,20 @@ namespace HealthcareManagementSystem.Controllers
         }
 
 
+
+
+
+
+
+
+        //Dispose the database
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -108,28 +108,7 @@ namespace HealthcareManagementSystem.Controllers
             return View();
         }
 
-        //Encrypt password method
-        public static string encrypt(string clearText)
-        {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (System.IO.MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
-                    }
-                    clearText = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-            return clearText;
-        }
+        
         //NewPatient 
         [Authorize]
         public ActionResult NewPatient()
@@ -153,6 +132,12 @@ namespace HealthcareManagementSystem.Controllers
             return View(db.Patients.ToList());
         }
 
+
+
+
+
+
+
         //User Logout action
         [Authorize]
         public ActionResult Logout()
@@ -163,9 +148,28 @@ namespace HealthcareManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
+        //Encrypt password method
+        public static string encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (System.IO.MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
         //Dispose the database
         protected override void Dispose(bool disposing)
         {

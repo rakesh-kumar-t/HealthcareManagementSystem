@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<HealthcareManagementSystem.Models.Member>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/Admin/AddMember" class="btn btn-info mb-2"><i class="fa fa-user-plus"></i> Add New Member</a>
 </p>
-<table class="table">
+<table class="table-responsive-lg">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
