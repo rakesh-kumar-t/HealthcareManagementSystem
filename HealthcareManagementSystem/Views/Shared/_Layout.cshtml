@@ -39,12 +39,28 @@
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
                 @if (Session["UserId"] != null)
                 {
-                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item"><a href="/Home/Logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></li>
+                    if (Session["Role"].ToString() == "Admin")
+                    {
+                        <!-- This menu is hidden in bigger devices with d-sm-none.
+                        The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
+                        <li class="nav-item dropdown d-sm-block d-md-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                                <a class="dropdown-item" href="#">Dashboard</a>
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Tasks</a>
+                                <a class="dropdown-item" href="#">Etc ...</a>
+                            </div>
+                        </li> <!-- Smaller devices menu END -->
+                    }
                 }
             </ul>
         </div>
     </nav>
-    <div class="container body-content ">
+    <div>
         @RenderBody()
     </div>
         <footer class=" text-center footer">
