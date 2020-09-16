@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Text;
 using System.Web.Security;
-
+using System.Web.UI.WebControls;
 
 namespace HealthcareManagementSystem.Controllers
 {
@@ -19,36 +19,63 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            if (Session["Role"].ToString() == "Admin")
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
         [Authorize]
         public ActionResult AddMember()
         {
-            return View();
+            if (Session["Role"].ToString() == "Admin")
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         [Authorize]
         public ActionResult AddMember(Member member)
         {
-            if (ModelState.IsValid)
+            if (Session["Role"].ToString() == "Admin")
             {
-                db.Members.Add(member);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Members.Add(member);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Data Formats");
+                }
+                return View(member);
+            }
+            else
+                return RedirectToAction("Index", "Home");
+
+        }
+        [Authorize]
+        public ActionResult ViewMembers()
+        {
+            if (Session["Role"].ToString() == "Admin")
+            {
+                return View(db.Members.ToList());
             }
             else
             {
-                ModelState.AddModelError("", "Invalid Data Formats");
+                return RedirectToAction("Index", "Home");
             }
-            return View(member);
-        }
-        public ActionResult ViewMembers()
-        {
-            return View(db.Members.ToList());
+
         }
         [Authorize]
         public ActionResult NewUser()
         {
-            return View();
+            if (Session["Role"].ToString() == "Admin")
+            {
+                ViewBag.Roles = new SelectList(db.Roles, "RoleId", "RoleName");
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Home");
         }
 
     }
