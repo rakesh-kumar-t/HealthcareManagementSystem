@@ -20,6 +20,11 @@ namespace HealthcareManagementSystem.Controllers
         {
             return View();
         }
+        [Authorize]
+        public ActionResult AddMember()
+        {
+            return View();
+        }
         
     }
 }
