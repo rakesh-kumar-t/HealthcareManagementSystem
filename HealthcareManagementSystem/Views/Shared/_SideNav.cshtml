@@ -76,56 +76,108 @@
         <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
         <!-- Bootstrap List Group -->
         <ul class="list-group sticky-top sticky-offset">
-            <!-- Separator with title -->
-            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                <small>MAIN MENU</small>
-            </li>
-            <!-- /END Separator -->
-            <!-- Menu with submenu -->
-            <a href="/Admin/NewMember" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user-plus fa-fw mr-3"></span>
-                    <span class="menu-collapsed">New Member</span>
-                </div>
-            </a>
-            <a href="/Admin/ViewMembers" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-users fa-fw mr-3"></span>
-                    <span class="menu-collapsed">View Members</span>
-                </div>
-            </a>
-            <a href="/Admin/Adduser" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user-md fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Add User </span>
-                </div>
-            </a>
-            <a href="/Admin/Managedrugs" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-building fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Stock House</span>
-                </div>
-            </a>
-            <!-- Separator with title -->
-            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                <small>Account</small>
-            </li>
-            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Profile</span>
-                    <span class="submenu-icon ml-auto"></span>
-                </div>
-            </a>
-            <!-- Submenu content -->
-            <div id="submenu2" class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Settings</span>
+            @{ string Role = Session["Role"].ToString();}
+            @if (Role == "Admin")
+            {
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>MAIN MENU</small>
+                </li>
+                <!-- /END Separator -->
+                <!-- Menu with submenu -->
+                <a href="/Admin/NewMember" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user-plus fa-fw mr-3"></span>
+                        <span class="menu-collapsed">New Member</span>
+                    </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Password</span>
+                <a href="/Admin/ViewMembers" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-users fa-fw mr-3"></span>
+                        <span class="menu-collapsed">View Members</span>
+                    </div>
                 </a>
-            </div>
+                <a href="/Admin/Adduser" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user-md fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add User </span>
+                    </div>
+                </a>
+                <a href="/Admin/Managedrugs" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-building fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Stock House</span>
+                    </div>
+                </a>
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>Account</small>
+                </li>
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Profile</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <!-- Submenu content -->
+                <div id="submenu2" class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Settings</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Password</span>
+                    </a>
+                </div>
+            }
+            else if (Role == "Manager")
+            {
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>MAIN MENU</small>
+                </li>
+                <!-- /END Separator -->
+                <!-- Menu with submenu -->
+                <a href="/Pharmacy/ViewStock" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-medkit fa-fw mr-3"></span>
+                        <span class="menu-collapsed">View Stock</span>
+                    </div>
+                </a>
+                <a href="/Pharmacy/AddStock" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-plus-square fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add Stock</span>
+                    </div>
+                </a>
+                <a href="/Pharmacy/ViewReport" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file-text fa-fw mr-3"></span>
+                        <span class="menu-collapsed">View Reports </span>
+                    </div>
+                </a>
+
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>Account</small>
+                </li>
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Profile</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <!-- Submenu content -->
+                <div id="submenu2" class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Settings</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Password</span>
+                    </a>
+                </div>
+            }
         </ul>
         <!-- List Group END-->
     </div>
