@@ -26,9 +26,21 @@ namespace HealthcareManagementSystem.Controllers
                 var RoleTable = db.Roles.ToList();
                 if (RoleTable.ToList().Count == 0)
                 {
-                    Role adm = new Role();
-                    adm.RoleName = "Admin";
-                    db.Roles.Add(adm);
+                    Role usr = new Role();
+                    usr.RoleName = "Admin";
+                    db.Roles.Add(usr);
+                    db.SaveChanges();
+                    usr.RoleName = "Manager";
+                    db.Roles.Add(usr);
+                    db.SaveChanges();
+                    usr.RoleName = "Reception";
+                    db.Roles.Add(usr);
+                    db.SaveChanges();
+                    usr.RoleName = "Pharmacy";
+                    db.Roles.Add(usr);
+                    db.SaveChanges();
+                    usr.RoleName = "Nurse";
+                    db.Roles.Add(usr);
                     db.SaveChanges();
                 }
                 User admin = new User();
