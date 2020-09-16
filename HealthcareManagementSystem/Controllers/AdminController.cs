@@ -93,6 +93,27 @@ namespace HealthcareManagementSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
         [Authorize]
+        public ActionResult EditMember(int? opno)
+        {
+            if(Session["Role"].ToString()=="Admin")
+            {
+                if(opno==null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+                Member m = db.Members.Find(opno);
+                if (m == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(m);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [Authorize]
         public ActionResult ViewStock()
         {
             if(Session["Role"].ToString()=="Manager")
