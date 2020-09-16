@@ -45,6 +45,11 @@ namespace HealthcareManagementSystem.Controllers
         {
             return View(db.Members.ToList());
         }
+        [Authorize]
+        public ActionResult NewUser()
+        {
+            return View();
+        }
 
     }
 }
