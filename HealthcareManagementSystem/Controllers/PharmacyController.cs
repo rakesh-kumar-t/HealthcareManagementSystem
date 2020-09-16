@@ -11,7 +11,7 @@ namespace HealthcareManagementSystem.Controllers
 {
     public class PharmacyController : Controller
     {
-        HealthCareContext db = new HealthCareContext();
+        private HealthCareContext db = new HealthCareContext();
 
         // GET: Pharmacy
         [Authorize]

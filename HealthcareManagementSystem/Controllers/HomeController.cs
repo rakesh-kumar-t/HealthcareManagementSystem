@@ -14,7 +14,7 @@ namespace HealthcareManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
-        HealthCareContext db=new HealthCareContext();
+        private HealthCareContext db=new HealthCareContext();
         public ActionResult Index()
         {
             string userid = "admin@demo.com";
@@ -46,8 +46,8 @@ namespace HealthcareManagementSystem.Controllers
                 User admin = new User();
                 admin.Name = "Adminname"; 
                 admin.UserId = userid;
-                admin.Password = encrypt(password);
-                admin.Confirmpassword = encrypt(password);
+                admin.Password = Encrypt(password);
+                admin.Confirmpassword = Encrypt(password);
                 admin.RoleId = 1;
                 db.Users.Add(admin);
                 db.SaveChanges();
@@ -58,7 +58,7 @@ namespace HealthcareManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(User Recept)
         {
-            Recept.Password = encrypt(Recept.Password);
+            Recept.Password = Encrypt(Recept.Password);
             var reception = db.Users.Where(r => r.UserId.Equals(Recept.UserId) && r.Password.Equals(Recept.Password)).FirstOrDefault();
             if(reception!=null)
             {
@@ -149,7 +149,7 @@ namespace HealthcareManagementSystem.Controllers
         }
 
         //Encrypt password method
-        public static string encrypt(string clearText)
+        public static string Encrypt(string clearText)
         {
             string EncryptionKey = "MAKV2SPBNI99212";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);

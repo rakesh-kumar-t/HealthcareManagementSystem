@@ -99,8 +99,8 @@ namespace HealthcareManagementSystem.Controllers
                 if (ModelState.IsValid)
                 {
                     string password = "User@123";//Default password for Every User , User can change password after login
-                    user.Password = HomeController.encrypt(password);
-                    user.Confirmpassword = HomeController.encrypt(password);
+                    user.Password = HomeController.Encrypt(password);
+                    user.Confirmpassword = HomeController.Encrypt(password);
                     db.Users.Add(user);
                     db.SaveChanges();
                     ViewBag.Status = "success";
@@ -152,8 +152,8 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                usr.Password = HomeController.encrypt(usr.Password);
-                usr.Confirmpassword = HomeController.encrypt(usr.Confirmpassword);
+                usr.Password = HomeController.Encrypt(usr.Password);
+                usr.Confirmpassword = HomeController.Encrypt(usr.Confirmpassword);
                 string username = User.Identity.Name;
                 User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
                 if (user != null)
