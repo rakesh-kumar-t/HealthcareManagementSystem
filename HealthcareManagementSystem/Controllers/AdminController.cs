@@ -25,6 +25,21 @@ namespace HealthcareManagementSystem.Controllers
         {
             return View();
         }
-        
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddMember(Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Members.Add(member);
+                db.SaveChanges();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid Data Formats");
+            }
+            return View(member);
+        }
+
     }
 }
