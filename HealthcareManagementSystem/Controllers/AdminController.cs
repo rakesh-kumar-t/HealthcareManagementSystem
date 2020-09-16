@@ -98,7 +98,7 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    string password = "User@123";
+                    string password = "User@123";//Default password for Every User , User can change password after login
                     user.Password = HomeController.encrypt(password);
                     user.Confirmpassword = HomeController.encrypt(password);
                     db.Users.Add(user);
