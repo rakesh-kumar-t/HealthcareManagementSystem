@@ -3,10 +3,143 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Pharmacy</h2>
 
-<h3>Menu</h3>
-@Html.ActionLink("ViewPharmacyStock", "actionname", null, new { @class = "list-group-item list-group-item-action" })
-@Html.ActionLink("AddPharmacyStock", "actionname", null, new { @class = "list-group-item list-group-item-action" })
-@Html.ActionLink("ViewReports", "actionname", null, new { @class = "list-group-item list-group-item-action" })
 
+
+<style>
+
+    #body-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #sidebar-container {
+        min-height: 100%;
+        background-color: #333;
+        padding: 0;
+    }
+
+    /* Sidebar sizes when expanded and expanded */
+    .sidebar-expanded {
+        width: 230px;
+    }
+
+    .sidebar-collapsed {
+        width: 60px;
+    }
+
+    /* Menu item*/
+    #sidebar-container .list-group a {
+        height: 50px;
+        color: white;
+    }
+
+    /* Submenu item*/
+    #sidebar-container .list-group .sidebar-submenu a {
+        height: 45px;
+        padding-left: 30px;
+    }
+
+    .sidebar-submenu {
+        font-size: 0.9rem;
+    }
+
+    /* Separators */
+    .sidebar-separator-title {
+        background-color: #333;
+        height: 35px;
+    }
+
+    .sidebar-separator {
+        background-color: #333;
+        height: 25px;
+    }
+
+    .logo-separator {
+        background-color: #333;
+        height: 60px;
+    }
+
+    /* Closed submenu icon */
+    #sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+        content: " \f0d7";
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 10px;
+    }
+    /* Opened submenu icon */
+    #sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+        content: " \f0da";
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 10px;
+    }
+</style>
+<!-- Bootstrap row -->
+<div class="row" id="body-row">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block col-2">
+        <!-- d-* hiddens the Sidebar in smaller devices. Its items can be kept on the Navbar 'Menu' -->
+        <!-- Bootstrap List Group -->
+        <ul class="list-group sticky-top sticky-offset">
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>MAIN MENU</small>
+            </li>
+            <!-- /END Separator -->
+            <!-- Menu with submenu -->
+            <a href="/Pharmacy/ViewStock" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-medkit fa-fw mr-3"></span>
+                    <span class="menu-collapsed">View Stock</span>
+                </div>
+            </a>
+            <a href="/Pharmacy/AddStock" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-plus-square fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Add Stock</span>
+                </div>
+            </a>
+            <a href="/Pharmacy/ViewReport" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-file-text fa-fw mr-3"></span>
+                    <span class="menu-collapsed">View Reports </span>
+                </div>
+            </a>
+           
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>Account</small>
+            </li>
+            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-user fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Profile</span>
+                    <span class="submenu-icon ml-auto"></span>
+                </div>
+            </a>
+            <!-- Submenu content -->
+            <div id="submenu2" class="collapse sidebar-submenu">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Settings</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Password</span>
+                </a>
+            </div>
+        </ul>
+        <!-- List Group END-->
+    </div>
+    <!-- sidebar-container END -->
+    <!-- MAIN -->
+    <div class="col py-3">
+
+
+    </div>
+    <!-- Main Col END -->
+
+</div>
+<!-- body-row END -->
