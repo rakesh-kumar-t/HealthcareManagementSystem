@@ -19,10 +19,14 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
-                return View();
+            if (Session["UserId"] != null &&  Session["Role"].ToString() == "Admin")
+            {
+                return View(db.Members.ToList());
+            }
             else
+            {
                 return RedirectToAction("Index", "Home");
+            }
         }
         [Authorize]
         public ActionResult AddMember()
@@ -53,19 +57,7 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
 
         }
-        [Authorize]
-        public ActionResult ViewMembers()
-        {
-            if (Session["Role"].ToString() == "Admin")
-            {
-                return View(db.Members.ToList());
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-        }
+        
         [Authorize]
         public ActionResult NewUser()
         {
