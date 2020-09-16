@@ -57,6 +57,27 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
 
         }
+        [Authorize]
+        public  ActionResult ViewMember(int? id)
+        {
+            if (Session["Role"].ToString() == "Admin")
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+                Member mem = db.Members.Find(id);
+                if (mem == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(mem);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
         
         [Authorize]
         public ActionResult NewUser()

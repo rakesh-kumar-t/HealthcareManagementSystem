@@ -1,0 +1,100 @@
+﻿@model HealthcareManagementSystem.Models.Member
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mother)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mother)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Father)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Father)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spouse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Child1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Child2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Opno }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
