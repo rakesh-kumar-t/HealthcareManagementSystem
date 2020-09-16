@@ -13,16 +13,16 @@
                 </li>
                 <!-- /END Separator -->
                 <!-- Menu with submenu -->
-                <a href="/Admin/NewMember" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-user-plus fa-fw mr-3"></span>
-                        <span class="menu-collapsed">New Member</span>
-                    </div>
-                </a>
                 <a href="/Admin/ViewMembers" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-users fa-fw mr-3"></span>
                         <span class="menu-collapsed">View Members</span>
+                    </div>
+                </a>
+                <a href="/Admin/AddMember" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user-plus fa-fw mr-3"></span>
+                        <span class="menu-collapsed">New Member</span>
                     </div>
                 </a>
                 <a href="/Admin/NewUser" class="bg-dark list-group-item list-group-item-action">
@@ -31,12 +31,22 @@
                         <span class="menu-collapsed">Add User </span>
                     </div>
                 </a>
-                <a href="/Admin/Managedrugs" class="bg-dark list-group-item list-group-item-action">
+                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-building fa-fw mr-3"></span>
                         <span class="menu-collapsed">Stock House</span>
+                        <span class="submenu-icon ml-auto"></span>
                     </div>
                 </a>
+                <!-- Submenu content -->
+                <div id="submenu1" class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">View Stock</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Add Stock</span>
+                    </a>
+                </div>
                 <!-- Separator with title -->
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                     <small>Account</small>
