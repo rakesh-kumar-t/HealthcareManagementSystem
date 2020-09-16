@@ -103,9 +103,13 @@ namespace HealthcareManagementSystem.Controllers
                     user.Confirmpassword = HomeController.encrypt(password);
                     db.Users.Add(user);
                     db.SaveChanges();
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "User Added Successfully";
                 }    
                 else
                 {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Error adding the user";
                     ModelState.AddModelError("", "Invalid Data Format.");
                 }
                 return View(user);
@@ -114,20 +118,20 @@ namespace HealthcareManagementSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
         [Authorize]
-        public ActionResult EditMember(int? opno)
+        public ActionResult EditMember(int? id)
         {
             if(Session["Role"].ToString()=="Admin")
             {
-                if(opno==null)
+                if(id==null)
                 {
                     return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
                 }
-                Member m = db.Members.Find(opno);
-                if (m == null)
+                Member member = db.Members.Find(id);
+                if (member == null)
                 {
                     return HttpNotFound();
                 }
-                return View(m);
+                return View(member);
             }
             else
             {
