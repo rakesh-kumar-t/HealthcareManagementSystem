@@ -16,6 +16,7 @@ namespace HealthcareManagementSystem.Controllers
     {
         private HealthCareContext db = new HealthCareContext();
         // GET: Admin
+        [Authorize]
         public ActionResult Index()
         {
             return View();
