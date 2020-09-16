@@ -100,6 +100,62 @@ namespace HealthcareManagementSystem.Controllers
             else
             return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public ActionResult ViewStock()
+        {
+            if(Session["Role"].ToString()=="Manager")
+            {
+                return View(db.DrugHouses.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [Authorize]
+        public ActionResult AddStock()
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
+            {
+                Session["DrugStock"] = new SelectList(db.DrugHouses, "DrugId", "Name","ExpiryDate");
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddStock(DrugHouse drug)
+        {
+            if (Session["Role"].ToString() == "Manager")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.DrugHouses.Add(drug);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Data Format.");
+                }
+                return View(drug);
+            }
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        //[Authorize]
+        //public ActionResult ViewReport()
+        //{
+        //    if (Session["Role"].ToString() == "Manager")
+        //    {
+        //        return View(db.DrugHouses.ToList());
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //}
+        
 
     }
 }
