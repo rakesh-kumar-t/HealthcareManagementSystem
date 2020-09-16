@@ -11,15 +11,32 @@ namespace HealthcareManagementSystem.Controllers
 {
     public class PharmacyController : Controller
     {
+        HealthCareContext db = new HealthCareContext();
+
         // GET: Pharmacy
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
+                return View(db.Pharmastocks.ToList());
+            else
+                return RedirectToAction("Index", "Home");
         }
-        public ActionResult ViewPharmacy()
+
+
+
+
+
+
+        //Dispose the database
+        protected override void Dispose(bool disposing)
         {
-            HealthCareContext db = new HealthCareContext();
-            return View(db.Pharmastocks.ToList());
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
+
     }
 }

@@ -70,7 +70,7 @@ namespace HealthcareManagementSystem.Controllers
                 if (role == "Admin")
                     return RedirectToAction("Index", "Admin");
                 else if (role == "Manager")
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Pharmacy");
                 else if (role == "Nurse")
                     return RedirectToAction("Index", "Home");
                 else if (role == "Pharmacy")
@@ -162,6 +162,10 @@ namespace HealthcareManagementSystem.Controllers
             Session.Abandon();
             return RedirectToAction("Index");
         }
+
+
+
+
         //Dispose the database
         protected override void Dispose(bool disposing)
         {
