@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background-image:url('/Images/HealthHome.jpg');background-size:cover;">
+
+    @*Rendering Top navigation bar partial view here*@
+    
+    @Html.Partial("_TopNav")
+
+    <div>
+        @RenderBody()
+    </div>
+    <footer class=" text-center footer">
+        <p>
+            &copy; @DateTime.Now.Year -Health Care Management System
+            Stay Home Stay Safe
+        </p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

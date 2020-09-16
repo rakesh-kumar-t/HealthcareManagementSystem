@@ -6,70 +6,44 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <style>
-        .bg-info{
-            background-color:lightseagreen!important;
-        }
-        footer {
-            color: ghostwhite;
-            background-color: rgba(50, 50, 50,0.5);
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-        }
-        .navbar-brand {
-            font-family: 'Righteous', cursive;
-        }
-    </style>
 </head>
 <body style="background-image:url('/Images/HealthHome.jpg');background-size:cover;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand" href="#"><img src="~/Images/Logo.jpg" height="40" width="40" style="border-radius:50%"/>HEALTHCENTER</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
-                @if (Session["UserId"] != null)
-                {
-                    <li class="nav-item"><a href="/Home/Logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></li>
-                    if (Session["Role"].ToString() == "Admin")
-                    {
-                        <!-- This menu is hidden in bigger devices with d-sm-none.
-                        The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
-                        <li class="nav-item dropdown d-sm-block d-md-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                                <a class="dropdown-item" href="#">Dashboard</a>
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Tasks</a>
-                                <a class="dropdown-item" href="#">Etc ...</a>
-                            </div>
-                        </li> <!-- Smaller devices menu END -->
-                    }
-                }
-            </ul>
-        </div>
-    </nav>
+
+    @*Rendering Top navigation bar partial view here*@
+    @Html.Partial("_TopNav")
+
     <div>
-        @RenderBody()
+        <!--We need side navigation only if any user is logged in, so checking is session is null-->
+        @if (Session["UserId"] != null)
+        {
+            <!-- Bootstrap row -->
+            <div class="row" id="body-row">
+                @Html.Partial("_SideNav")
+                <!-- MAIN -->
+                <div class="col py-3">
+
+                    @RenderBody()
+
+                </div>
+                <!-- Main Col END -->
+            </div>
+            <!-- body-row END -->
+
+        }
+        else
+        {
+            @RenderBody()
+        }
     </div>
         <footer class=" text-center footer">
-            <p>&copy; @DateTime.Now.Year -Health Care Management System
-            Stay Home Stay Safe</p>
+            <p>
+                &copy; @DateTime.Now.Year -Health Care Management System
+                Stay Home Stay Safe
+            </p>
         </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
