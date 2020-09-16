@@ -41,7 +41,7 @@ namespace HealthcareManagementSystem.Controllers
             }
             return View(member);
         }
-        public ActionResult ViewMember()
+        public ActionResult ViewMembers()
         {
             return View(db.Members.ToList());
         }

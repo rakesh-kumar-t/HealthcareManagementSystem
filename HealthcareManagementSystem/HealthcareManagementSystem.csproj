@@ -130,16 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\**\*.cs" />
-    <Compile Include="Models\DrugHouse.cs" />
-    <Compile Include="Models\HealthCareContext.cs" />
-    <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\Patient.cs" />
-    <Compile Include="Models\Pharmacy.cs" />
-    <Compile Include="Models\Pharmastock.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\RoleProviderclass.cs" />
-    <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\**" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,12 +279,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\ViewPatient.cshtml" />
-    <Content Include="Views\Shared\_SideNav.cshtml" />
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Shared\_TopNav.cshtml" />
-    <Content Include="Views\Admin\AddMember.cshtml" />
-    <Content Include="Views\Admin\ViewMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
