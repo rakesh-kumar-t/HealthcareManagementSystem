@@ -143,6 +143,19 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditMember(Member mbr)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(mbr).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(mbr);
+        }
+
         //Change password will redirect to home controller common method
         [Authorize]
         public ActionResult ChangePassword()
@@ -195,6 +208,40 @@ namespace HealthcareManagementSystem.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public ActionResult EditStock(int? id)
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+                DrugHouse drugs = db.DrugHouses.Find(id);
+                if (drugs == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(drugs);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditStock(DrugHouse drug)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Entry(drug).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(drug);
+        }
+
         [Authorize]
         public ActionResult ViewReport()
         {
