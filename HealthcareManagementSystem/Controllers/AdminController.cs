@@ -44,14 +44,19 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "Member Added Successfully";
                     db.Members.Add(member);
                     db.SaveChanges();
+                    return View();
                 }
                 else
                 {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Member cannot be added";
                     ModelState.AddModelError("", "Invalid Data Formats");
+                    return View(member);
                 }
-                return View(member);
             }
             else
                 return RedirectToAction("Index", "Home");
