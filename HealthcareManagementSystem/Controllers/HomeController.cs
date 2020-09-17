@@ -196,6 +196,48 @@ namespace HealthcareManagementSystem.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public ActionResult AddService()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddService(Service serve)
+        {
+            if (Session["Role"].ToString() == "Nurse"||Session["Role"].ToString()=="Reception")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Services.Add(serve);
+                    db.SaveChanges();
+                }
+                return View(serve);
+            }
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        public ActionResult AddMedicine()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddMedicine(Pharmacy pharm)
+        {
+            if (Session["Role"].ToString() == "Nurse"||Session["Role"].ToString()=="Pharmacy"||Session["Role"].ToString()=="Reception")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Pharmacies.Add(pharm);
+                    db.SaveChanges();
+                }
+                return View(pharm);
+            }
+            else
+                return RedirectToAction("Index", "Home");
+        }
         //User Logout action
         [Authorize]
         public ActionResult Logout()

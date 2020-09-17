@@ -303,6 +303,8 @@
     <Content Include="Views\Pharmacy\ViewReport.cshtml" />
     <Content Include="Views\Pharmacy\AddStock.cshtml" />
     <Content Include="Views\Home\Settings.cshtml" />
+    <Content Include="Views\Home\AddService.cshtml" />
+    <Content Include="Views\Home\AddMedicine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
