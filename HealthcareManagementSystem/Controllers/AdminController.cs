@@ -183,6 +183,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
+                Session["DropDown"] = new SelectList(db.DrugHouses, "DrugId", "Name");
                 return View();
             }
             else

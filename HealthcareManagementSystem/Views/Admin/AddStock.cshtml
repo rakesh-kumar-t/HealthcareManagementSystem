@@ -6,8 +6,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>DrugHouse</h4>
-    <hr />
+    <h4>Stock House</h4>
     @{
         if (ViewBag.Status != null)
         {
@@ -20,46 +19,56 @@
         }
     }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (Session["DropDown"] != null)
+    {
+        <div class="row form-group col-sm-4">
+            @Html.Label("Helper","Suggested Medicine Names ")
+            @Html.DropDownList("Helper", Session["DropDown"] as SelectList, "Same medicine ?", htmlAttributes: new { @class = "form-control" })
+        </div>
+    }
 <div class="form-row">
     <div class="form-group col-sm-4">
-        @Html.LabelFor(model => model.Name)
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.LabelFor(model => model.Name,"Medicine Name")
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@placeholder="Medicine Name"} })
         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
     </div>
+    <div class="col-sm-2">
+
+    </div>
 </div>
+<div class="form-row">
     <div class="form-group col-md-4">
         @Html.LabelFor(model => model.ManufactureDate)
-            @Html.EditorFor(model => model.ManufactureDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ManufactureDate, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.ManufactureDate, new { htmlAttributes = new { @class = "form-control",@type="Date" } })
+        @Html.ValidationMessageFor(model => model.ManufactureDate, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group col-md-4">
         @Html.LabelFor(model => model.ExpiryDate)
-            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
     </div>
-
-    <div class="form-group col-md-4">
+</div>
+<div class="form-row">
+    <div class="form-group col-md-2">
         @Html.LabelFor(model => model.StockLeft)
-            @Html.EditorFor(model => model.StockLeft, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StockLeft, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.StockLeft, new { htmlAttributes = new { @class = "form-control" ,@placeholder="In numbers"} })
+        @Html.ValidationMessageFor(model => model.StockLeft, "", new { @class = "text-danger" })
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         @Html.LabelFor(model => model.Price)
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" ,@placeholder="Per item"} })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
     </div>
-
-    <div class="form-group col-md-4">
-        <input type="submit" value="Create" class="btn btn-default" />
+    <div class="form-group col-md-3 mt-2">
+        <label for="buton"></label>
+        <input type="submit" value="Add Stock" class="btn btn-info form-control" id="buton" />
     </div>
+</div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
