@@ -13,11 +13,7 @@ namespace HealthcareManagementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id{get;set;}
         public int PId { get; set; }//from Patient
-        public string PatientName { get; set; }//from Patient
-        public string Type { get; set; }//Category from Members
         public int PharmId { get; set; }//foreign key from Pharmacy
-        [Required]
-        public string MedName { get; set; }
         [Required]
         public string Quantity { get; set; }
         [Required]

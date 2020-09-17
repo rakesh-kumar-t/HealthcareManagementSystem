@@ -13,8 +13,6 @@ namespace HealthcareManagementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PharmId { get; set; }
         [Required]
-        public string MedicineName { get; set; }
-        [Required]
         public int Stockleft { get; set; }
         [Required]
         public int DrugId { get; set; }//Foreign key from drugstore
