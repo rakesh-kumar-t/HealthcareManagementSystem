@@ -157,13 +157,15 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddService()
         {
+
+            Session["DropDown"] = new SelectList(db.Patients, "PId", "PatientName");
             return View();
         }
         [HttpPost]
         [Authorize]
         public ActionResult AddService(Service serve)
         {
-            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception")
+            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception"||Session["Role"].ToString()=="Pharmacy")
             {
                 if (ModelState.IsValid)
                 {
