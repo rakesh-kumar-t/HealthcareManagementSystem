@@ -132,7 +132,26 @@ namespace HealthcareManagementSystem.Controllers
             return View(db.Patients.ToList());
         }
 
-
+        [Authorize]
+        public ActionResult Profile()
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Profile(User usr)
+        {
+            string username = User.Identity.Name;
+            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+            user.Name = usr.Name;
+            Session["Name"] = user.Name.ToString();
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return View(usr);
+        }
 
 
 
