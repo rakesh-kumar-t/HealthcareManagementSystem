@@ -168,7 +168,7 @@ namespace HealthcareManagementSystem.Controllers
                 else
                 {
                     ViewBag.Status = "danger";
-                    ViewBag.Message = "Error adding the user";
+                    ViewBag.Message = "Error changing password";
                 }
                 return RedirectToAction("ChangePassword");
             }
@@ -222,7 +222,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return View(db.Pharmacies.ToList());
+                return RedirectToAction("ViewReport", "Pharmacy");
             }
             else
             {

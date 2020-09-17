@@ -55,9 +55,9 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult ViewReport()
         {
-            if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Manager"||Session["Role"].ToString() == "Admin")
             {
-                return View(db.Pharmastocks.ToList());
+                return View(db.Pharmacies.ToList());
             }
             else
             {
