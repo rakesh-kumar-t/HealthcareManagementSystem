@@ -138,43 +138,16 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        //Change password will redirect to home controller common method
         [Authorize]
         public ActionResult ChangePassword()
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
-                return View();
+                return RedirectToAction("ChangePassword", "Home");
             else
                 return RedirectToAction("Index", "Home");
         }
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(User usr)
-        {
-            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
-            {
-                usr.Password = HomeController.Encrypt(usr.Password);
-                usr.Confirmpassword = HomeController.Encrypt(usr.Confirmpassword);
-                string username = User.Identity.Name;
-                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-                if (user != null)
-                {
-                    user.Password = usr.Password;
-                    user.Confirmpassword = usr.Confirmpassword;
-                    db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    ViewBag.Status = "success";
-                    ViewBag.Message = "Password Changed Successfully";
-                }
-                else
-                {
-                    ViewBag.Status = "danger";
-                    ViewBag.Message = "Error changing password";
-                }
-                return RedirectToAction("ChangePassword");
-            }
-            else
-                return RedirectToAction("Index", "Home");
-        }
+        
         [Authorize]
         public ActionResult ViewStock()
         {

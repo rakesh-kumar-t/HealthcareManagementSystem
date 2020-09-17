@@ -300,7 +300,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Admin\EditMember.cshtml" />
     <Content Include="Views\Admin\ViewMember.cshtml" />
-    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Pharmacy\ViewReport.cshtml" />
     <Content Include="Views\Pharmacy\AddStock.cshtml" />
     <Content Include="Views\Home\Settings.cshtml" />

@@ -147,6 +147,8 @@ namespace HealthcareManagementSystem.Controllers
             string username = User.Identity.Name;
             User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
             user.Name = usr.Name;
+            user.Password = user.Password;
+            user.Confirmpassword = user.Password;
             Session["Name"] = user.Name.ToString();
             db.Entry(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -154,9 +156,46 @@ namespace HealthcareManagementSystem.Controllers
         }
 
 
-
-
-
+        //COMMON METHODS FOR ALL USERS DEFINED HERE
+        //Change Password for user
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            if (Session["UserId"] != null)
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        //Post method for changepassword
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(User usr)
+        {
+            if (Session["UserId"] != null)
+            {
+                usr.Password = Encrypt(usr.Password);
+                usr.Confirmpassword = Encrypt(usr.Confirmpassword);
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+                if (user != null)
+                {
+                    user.Password = usr.Password;
+                    user.Confirmpassword = usr.Confirmpassword;
+                    db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "Password Changed Successfully";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Error changing password";
+                }
+                return RedirectToAction("ChangePassword");
+            }
+            else
+                return RedirectToAction("Index", "Home");
+        }
         //User Logout action
         [Authorize]
         public ActionResult Logout()
