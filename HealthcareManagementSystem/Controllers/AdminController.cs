@@ -84,7 +84,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"]!=null&&Session["Role"].ToString() == "Admin")
             {
-                Session["Rolelist"] = new SelectList(db.Roles,"RoleId","RoleName");
+                Session["DropDown"] = new SelectList(db.Roles,"RoleId","RoleName");
                 return View();
             }
             else
