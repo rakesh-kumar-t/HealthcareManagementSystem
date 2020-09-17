@@ -68,7 +68,7 @@
     text-align: right;
     padding-left: 10px;
 }
-.bg-info {
+.bg-info,.btn-info {
     background-color: lightseagreen !important;
 }
 

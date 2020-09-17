@@ -13,10 +13,10 @@
             {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hi @Session["Name"]<i class="fa fa-user"></i>
+                        <img src="~/Images/avatar.png" height="20" class="text-white" /> @Session["Name"]
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/@Session["Role"]/ChangePassword">ChangePassword</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -50px;">
+                        <a class="dropdown-item" href="/@Session["Role"]/ChangePassword">Password</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Home/Logout">Logout <i class="fa fa-sign-out"></i></a>
                     </div>
