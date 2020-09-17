@@ -304,7 +304,7 @@
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <Content Include="Views\Pharmacy\ViewReport.cshtml" />
     <Content Include="Views\Pharmacy\AddStock.cshtml" />
-    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

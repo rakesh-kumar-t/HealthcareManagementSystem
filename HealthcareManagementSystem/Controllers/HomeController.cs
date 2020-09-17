@@ -133,7 +133,7 @@ namespace HealthcareManagementSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult Profile()
+        public ActionResult Settings()
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
                 return View();
@@ -142,7 +142,7 @@ namespace HealthcareManagementSystem.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult Profile(User usr)
+        public ActionResult Settings(User usr)
         {
             string username = User.Identity.Name;
             User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
