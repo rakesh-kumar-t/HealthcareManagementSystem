@@ -17,7 +17,7 @@
         @if (Session["UserId"] != null)
         {
             <!-- Bootstrap row -->
-            <div class="row" id="body-row">
+            <div class="row flex-xl-nowrap" id="body-row">
                 @Html.Partial("_SideNav")
                 <!-- MAIN -->
                 <div class="col py-3">
@@ -28,7 +28,6 @@
                 <!-- Main Col END -->
             </div>
             <!-- body-row END -->
-
         }
         else
         {
