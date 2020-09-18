@@ -5,6 +5,9 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">
+                    No
+                </th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th scope="col">
@@ -23,9 +26,14 @@
             </tr>
         </thead>
         <tbody>
+            @{ var i = 0;}
             @foreach (var item in Model)
             {
+                i++;
                 <tr class="table-info">
+                    <td>
+                        @i
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -45,6 +53,7 @@
                         <a href="/Admin/EditStock/@item.DrugId" class="btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                 </tr>
+                
             }
         </tbody>
     </table>

@@ -6,38 +6,78 @@
     .card-header{
         font-size:1.3rem;
     }
+    .table td, .table th {
+        padding: 0rem;
+        width: 50%;
+    }
+    
 </style>
     <h4>Member Profile</h4>
-<div class="card w-75 p-3" id="detailcard">
-    <div class="dl-horizontal">
+    <div class="card w-50 p-3" id="detailcard">
         <div class="card-header font-weight-bold">
             @Html.DisplayFor(model => model.Name)
+            <span class="float-right">@if (Model.Type == "Employee") { <i class="badge-info text-monospace">Employee</i>}</span>
         </div>
-        <div class="card-body">
-        <table>
-            <thead>
-                <td>
-                    abcd
-                </td>
-            </thead>
-            <div>
-                <b>@Html.DisplayNameFor(model => model.Department)</b>:@Html.DisplayFor(model => model.Department)
-            </div>
-            <b>@Html.DisplayNameFor(model => model.Age)</b>:@Html.DisplayFor(model => model.Age)</div>
-            <b>@Html.DisplayNameFor(model => model.Gender)</b>:@Html.DisplayFor(model => model.Gender)
-            <b>@Html.DisplayNameFor(model => model.Address)</b>:@Html.DisplayFor(model => model.Address)
-            <b>@Html.DisplayNameFor(model => model.Mother)</b>:@Html.DisplayFor(model => model.Mother)
-            <b>@Html.DisplayNameFor(model => model.Father)</b>:@Html.DisplayFor(model => model.Father)
-            <b>@Html.DisplayNameFor(model => model.Spouse)</b>:@Html.DisplayFor(model => model.Spouse)
-            <b>@Html.DisplayNameFor(model => model.Child1)</b>:@Html.DisplayFor(model => model.Child1)
-            <b>@Html.DisplayNameFor(model => model.Child2)</b>:@Html.DisplayFor(model => model.Child2)
-            <b>@Html.DisplayNameFor(model => model.Type)</b>:@Html.DisplayFor(model => model.Type)
-            <b>@Html.DisplayNameFor(model => model.Child2)</b>:@Html.DisplayFor(model => model.Child2)
-        </table>
+        <div class="card-body p-0">
+            <table class="table table-responsive-sm justify-content-md-center table-striped table-borderless">
+                <tbody>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Department)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.Department)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Age)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.Age)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                        <td>@Html.DisplayFor(model => model.Gender)</td>
 
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Address)</th>
+                        <td>@Html.DisplayFor(model => model.Address)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Mother)</th>
+                        <td>@Html.DisplayFor(model => model.Mother)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Father)</th>
+                        <td>@Html.DisplayFor(model => model.Father)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Spouse)</th>
+                        <td>@Html.DisplayFor(model => model.Spouse)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Child1)</th>
+                        <td>@Html.DisplayFor(model => model.Child1)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Child2)</th>
+                        <td>@Html.DisplayFor(model => model.Child2)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Type)</th>
+                        <td>@Html.DisplayFor(model => model.Type)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Child2)</th>
+                        <td>@Html.DisplayFor(model => model.Child2)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
 <p>
     @Html.ActionLink("Edit", "EditMember", new { id = Model.Opno }) |
 </p>

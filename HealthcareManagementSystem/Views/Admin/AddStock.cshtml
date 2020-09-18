@@ -1,74 +1,82 @@
 ﻿@model HealthcareManagementSystem.Models.DrugHouse
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Stock House</h4>
-    @{
-        if (ViewBag.Status != null)
+
+    <div class="form-horizontal">
+        <h4>Stock House</h4>
+        @{
+            if (ViewBag.Status != null)
+            {
+                <div class="alert alert-@ViewBag.Status alert-dismissible fade show w-50" role="alert">
+                    @ViewBag.Message
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (ViewBag.DrugList != null)
         {
-            <div class="alert alert-@ViewBag.Status alert-dismissible fade show w-50" role="alert">
-                @ViewBag.Message
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="row form-group col-sm-4">
+                @Html.Label("Helper", "Suggested Medicine Names ")
+                @Html.DropDownList("Helper", new SelectList(ViewBag.DrugList, "DrugId", "Name"), "Select a medicine", htmlAttributes: new { @class = "form-control" })
             </div>
         }
-    }
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @if (ViewBag.DrugList != null)
-    {
-        <div class="row form-group col-sm-4">
-            @Html.Label("Helper","Suggested Medicine Names ")
-            @Html.DropDownList("Helper", new SelectList(ViewBag.DrugList, "DrugId", "Name"), "Select a medicine", htmlAttributes: new { @class = "form-control" })
+        <div class="form-row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.Name, "Medicine Name")
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medicine Name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-2">
+
+            </div>
         </div>
-    }
-<div class="form-row">
-    <div class="form-group col-sm-4">
-        @Html.LabelFor(model => model.Name,"Medicine Name")
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@placeholder="Medicine Name"} })
-        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-    </div>
-    <div class="col-sm-2">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.ManufactureDate)
+                @Html.EditorFor(model => model.ManufactureDate, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+                @Html.ValidationMessageFor(model => model.ManufactureDate, "", new { @class = "text-danger" })
+            </div>
 
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-4">
-        @Html.LabelFor(model => model.ManufactureDate)
-        @Html.EditorFor(model => model.ManufactureDate, new { htmlAttributes = new { @class = "form-control",@type="Date" } })
-        @Html.ValidationMessageFor(model => model.ManufactureDate, "", new { @class = "text-danger" })
-    </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.ExpiryDate)
+                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.StockLeft)
+                @Html.EditorFor(model => model.StockLeft, new { htmlAttributes = new { @class = "form-control", @placeholder = "In numbers" } })
+                @Html.ValidationMessageFor(model => model.StockLeft, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group col-md-4">
-        @Html.LabelFor(model => model.ExpiryDate)
-        @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
-        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Price)
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Per item" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-3 mt-2">
+                <label for="buton"></label>
+                <input type="submit" value="Add Stock" class="btn btn-info form-control" id="buton" />
+            </div>
+        </div>
     </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-2">
-        @Html.LabelFor(model => model.StockLeft)
-        @Html.EditorFor(model => model.StockLeft, new { htmlAttributes = new { @class = "form-control" ,@placeholder="In numbers"} })
-        @Html.ValidationMessageFor(model => model.StockLeft, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group col-md-3">
-        @Html.LabelFor(model => model.Price)
-        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" ,@placeholder="Per item"} })
-        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col-md-3 mt-2">
-        <label for="buton"></label>
-        <input type="submit" value="Add Stock" class="btn btn-info form-control" id="buton" />
-    </div>
-</div>
-</div>
 }
-
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Helper").change(function () {
+            var a = $("#Helper Option:Selected").text();
+            $("#Name").val(a);
+        })
+    })
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -4,56 +4,57 @@
     ViewBag.Title = "ViewPharmacy";
 }
 
-<h2>ViewPharmacy</h2>
+<h4 class="h4">View Pharmacy Stocks</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DrugHouses.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stockleft)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Expiry)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dateadded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped text-center text-dark">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.DrugHouses.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Stockleft)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Expiry)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Dateadded)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="table-info">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrugHouses.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stockleft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Expiry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dateadded)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PharmId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PharmId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PharmId })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DrugHouses.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stockleft)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Expiry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dateadded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PharmId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PharmId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PharmId })
-            </td>
-        </tr>
-    }
-
-</table>
-
+    </table>
+</div>
