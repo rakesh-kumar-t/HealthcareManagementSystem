@@ -45,10 +45,10 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    ViewBag.Status = "success";
-                    ViewBag.Message = "Member Added Successfully";
                     db.Members.Add(member);
                     db.SaveChanges();
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "Member Added Successfully";
                     ModelState.Clear();
                     return View();
                 }
@@ -110,6 +110,7 @@ namespace HealthcareManagementSystem.Controllers
                     user.Confirmpassword = HomeController.Encrypt(password);
                     db.Users.Add(user);
                     db.SaveChanges();
+                    ModelState.Clear();
                     ViewBag.Status = "success";
                     ViewBag.Message = "User Added Successfully";
                 }    
@@ -174,7 +175,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if(Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return View(db.DrugHouses.ToList());
+                return View(db.DrugHouses.OrderBy(o=>o.StockLeft).ToList());
             }
             else
             {
@@ -202,9 +203,14 @@ namespace HealthcareManagementSystem.Controllers
                 {
                     db.DrugHouses.Add(drug);
                     db.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "Stock Added Successfully";
                 }
                 else
                 {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Could not add stock";
                     ModelState.AddModelError("", "Invalid Data Format.");
                 }
                 ViewBag.DrugList = db.DrugHouses;
@@ -243,6 +249,13 @@ namespace HealthcareManagementSystem.Controllers
             {
                 db.Entry(drug).State = EntityState.Modified;
                 db.SaveChanges();
+                ViewBag.Status = "success";
+                ViewBag.Message = "Stock Updated Successfully";
+            }
+            else
+            {
+                ViewBag.Status = "danger";
+                ViewBag.Message = "Stock Couldn't be updated, Try again";
             }
             return View(drug);
         }
