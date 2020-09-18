@@ -267,26 +267,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Admin\AddMember.cshtml" />
-    <Content Include="Views\Admin\AddStock.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\NewUser.cshtml" />
-    <Content Include="Views\Admin\ViewStock.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\NewPatient.cshtml" />
-    <Content Include="Views\Home\Reception.cshtml" />
-    <Content Include="Views\Home\ViewPatient.cshtml" />
-    <Content Include="Views\Pharmacy\Index.cshtml" />
-    <Content Include="Views\Pharmacy\ViewPharmacy.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Shared\_SideNav.cshtml" />
-    <Content Include="Views\Shared\_TopNav.cshtml" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\**" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -297,15 +278,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Admin\EditMember.cshtml" />
-    <Content Include="Views\Admin\ViewMember.cshtml" />
-    <Content Include="Views\Home\ChangePassword.cshtml" />
-    <Content Include="Views\Pharmacy\ViewReport.cshtml" />
-    <Content Include="Views\Pharmacy\AddStock.cshtml" />
-    <Content Include="Views\Home\Settings.cshtml" />
-    <Content Include="Views\Home\AddService.cshtml" />
-    <Content Include="Views\Home\AddMedicine.cshtml" />
-    <Content Include="Views\Admin\EditStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
