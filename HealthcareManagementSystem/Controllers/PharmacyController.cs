@@ -1,4 +1,5 @@
 ﻿using HealthcareManagementSystem.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,20 +36,30 @@ namespace HealthcareManagementSystem.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult AddStock(Pharmastock pharm)
+        public ActionResult AddStock(int? DrugId,int? Itemno)
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
             {
-                if (ModelState.IsValid)
+                if (DrugId==null || Itemno==null)
                 {
-                    db.Pharmastocks.Add(pharm);
-                    db.SaveChanges();
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+                var Drug = db.DrugHouses.Find(DrugId);
+                if (Drug == null)
+                {
+                    return HttpNotFound();
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid Data Format.");
+                    Pharmastock pharm = new Pharmastock();
+                    pharm.DrugId=Drug.DrugId;
+                    pharm.Stockleft = (int)Itemno;
+                    pharm.Expiry = Drug.ExpiryDate;
+                    pharm.Dateadded = DateTime.Now;
+                    db.Pharmastocks.Add(pharm);
+                    db.SaveChanges();
                 }
-                return View(pharm);
+                return View();
             }
             else
                 return RedirectToAction("Index", "Home");
