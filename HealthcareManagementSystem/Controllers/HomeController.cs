@@ -180,10 +180,14 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddMedicine()
         {
-
-            ViewBag.Patientlist = db.Patients;
-            ViewBag.Druglist = db.Pharmastocks;
-            return View();
+            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy" || Session["Role"].ToString() == "Reception")
+            {
+                ViewBag.PatientList = db.Patients;
+                ViewBag.DrugList = db.Pharmastocks;
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         [Authorize]
