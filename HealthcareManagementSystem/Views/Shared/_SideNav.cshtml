@@ -82,6 +82,39 @@
                     </div>
                 </a>
             }
+            else if (Session["Role"] != null)
+            {
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>MAIN MENU</small>
+                </li>
+                <!-- /END Separator -->
+                <!-- Menu with submenu -->
+                <a href="/Home/ViewPatient" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-medkit fa-fw mr-3"></span>
+                        <span class="menu-collapsed">View Patients</span>
+                    </div>
+                </a>
+                <a href="/Home/NewPatient" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-plus-square fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add Patients</span>
+                    </div>
+                </a>
+                <a href="/Home/AddService" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file-text fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add Services</span>
+                    </div>
+                </a>
+                <a href="/Home/AddMedicine" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file-text fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add Medicine</span>
+                    </div>
+                </a>
+            }
             <!-- Separator with title -->
             <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                 <small>Account</small>

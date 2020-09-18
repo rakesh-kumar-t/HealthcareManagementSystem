@@ -76,7 +76,7 @@ namespace HealthcareManagementSystem.Controllers
                 else if (role == "Pharmacy")
                     return RedirectToAction("ViewPatient", "Home");
                 else if (role == "Reception")
-                    return RedirectToAction("NewPatient", "Home");
+                    return RedirectToAction("ViewPatient", "Home");
                 else
                     return RedirectToAction("Index", "Home");
             }
@@ -115,24 +115,45 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult NewPatient()
         {
-            ViewBag.Memberlist = db.Members;
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Reception" )
+            {
+                ViewBag.Memberlist = db.Members;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         [Authorize]
         public ActionResult NewPatient(Patient pt)
         {
-            if(ModelState.IsValid)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Reception")
             {
+                if (ModelState.IsValid)
+                {
                 db.Patients.Add(pt);
                 db.SaveChanges();
                 return RedirectToAction("Reception");
+                }
+                return View(pt);
             }
-            return View(pt);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ActionResult ViewPatient()
         {
-            return View(db.Patients.ToList());
+            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy"))
+            {
+                return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [Authorize]
