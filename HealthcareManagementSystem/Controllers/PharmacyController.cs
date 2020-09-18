@@ -28,7 +28,7 @@ namespace HealthcareManagementSystem.Controllers
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
             {
                 Session["DropDown"] = new SelectList(db.DrugHouses, "DrugId", "Name");
-                return View(db.DrugHouses.ToList());
+                return View(db.DrugHouses.Where(d=>d.StockLeft>0).OrderBy(exp=>exp.ExpiryDate).ToList());
             }
             else
                 return RedirectToAction("Index", "Home");

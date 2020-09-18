@@ -3,12 +3,32 @@
 @{
     ViewBag.Title = "AddStock";
 }
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-<h2>AddStock</h2>
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input {
+        background-color: transparent;
+    }
+</style>
+
+<h3 class="toast-header">DrugHouse Stock List</h3>
 <div class="table-responsive">
     <table class="table table-striped text-center text-dark">
         <thead class="thead-light">
             <tr>
+                <th scope="col">
+                    No
+                </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
@@ -19,29 +39,34 @@
                     @Html.DisplayNameFor(model => model.ExpiryDate)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.StockLeft)
+                    @Html.DisplayName("Available Stocks")
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Price)
+                    @Html.DisplayNameFor(model => model.Price)/qty
                 </th>
-                <th></th>
+                <th>Add to Pharmacy</th>
             </tr>
         </thead>
         <tbody>
             @{
+                int i = 0;
                 if (Model != null)
                 {
                     foreach (var item in Model)
                     {
+                        i++;
                         <tr class="table-info">
+                            <td>
+                                @i
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ManufactureDate)
+                                @Html.DisplayFor(modelItem => item.ManufactureDate.Month)/@Html.DisplayFor(modelItem => item.ManufactureDate.Year)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                @Html.DisplayFor(modelItem => item.ExpiryDate.Month)/@Html.DisplayFor(modelItem => item.ExpiryDate.Year)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.StockLeft)
@@ -50,9 +75,18 @@
                                 @Html.DisplayFor(modelItem => item.Price)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.DrugId }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.DrugId }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.DrugId })
+                                @using (Html.BeginForm("AddStock", "Pharmacy", FormMethod.Post, new { @class = "form-row" }))
+                                {
+                                    <div class="col-5 text-right">Qty: </div>
+                                    <div class="input-group col-6">
+                                        @Html.TextBox("Itemno", "2", new { @class = "form-control-sm col-sm-3", @type = "number", @min = "2" })
+                                        @Html.Hidden("DrugId", new { @class = "form-control-sm", @value = item.DrugId })
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Add To Pharmacy"><i class="fa fa-download"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-1"></div>
+                                }
                             </td>
                         </tr>
                     }
@@ -62,3 +96,10 @@
 
     </table>
 </div>
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
