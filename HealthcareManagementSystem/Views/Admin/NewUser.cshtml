@@ -34,7 +34,7 @@
 
     <div class="form-group col-md-4">
         @Html.LabelFor(model => model.RoleId)
-        @Html.DropDownListFor(model => model.RoleId, Session["DropDown"] as SelectList, "Select a role", htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.Rolelist,"RoleId","RoleName"), "Select a role", htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
     </div>
 

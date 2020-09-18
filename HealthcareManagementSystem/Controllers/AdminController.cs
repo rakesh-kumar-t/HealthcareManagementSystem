@@ -90,7 +90,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"]!=null&&Session["Role"].ToString() == "Admin")
             {
-                Session["DropDown"] = new SelectList(db.Roles,"RoleId","RoleName");
+                ViewBag.Rolelist = db.Roles;
                 return View();
             }
             else
@@ -118,6 +118,7 @@ namespace HealthcareManagementSystem.Controllers
                     ViewBag.Message = "Error adding the user";
                     ModelState.AddModelError("", "Invalid Data Format.");
                 }
+                ViewBag.Rolelist = db.Roles;
                 return View(user);
             }
             else
