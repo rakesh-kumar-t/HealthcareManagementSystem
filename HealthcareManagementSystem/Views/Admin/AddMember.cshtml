@@ -91,7 +91,7 @@
             {
                 new SelectListItem{Text="Employee",Value="Employee"},
                 new SelectListItem{Text="Student",Value="Student"},
-            }, "Select Category", htmlAttributes: new { @class = "form-control" })
+            }, "Select Category", htmlAttributes: new { @class = "form-control",@required="required" })
             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -48,6 +48,7 @@ namespace HealthcareManagementSystem.Controllers
                     ViewBag.Message = "Member Added Successfully";
                     db.Members.Add(member);
                     db.SaveChanges();
+                    ModelState.Clear();
                     return View();
                 }
                 else
