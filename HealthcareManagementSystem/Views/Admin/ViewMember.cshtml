@@ -3,20 +3,34 @@
     #detailcard{
         color:black;
     }
+    .table {
+        background-color: rgba(32,178,170,0.2);
+    }
     .card-header{
         font-size:1.3rem;
     }
     .table td, .table th {
-        padding: 0rem;
-        width: 50%;
+        padding:3px;
+        margin-left:10px;
     }
     
 </style>
-    <h4>Member Profile</h4>
+    <a href="/Admin" class="btn btn-outline-info btn-sm mb-1"><i class="fa fa-backward"></i>Go back</a>
     <div class="card w-50 p-3" id="detailcard">
         <div class="card-header font-weight-bold">
+            <span class="fa fa-user-circle" ></span>
             @Html.DisplayFor(model => model.Name)
-            <span class="float-right">@if (Model.Type == "Employee") { <i class="badge-info text-monospace">Employee</i>}</span>
+            <span class="float-right">
+                @if (Model.Type == "Employee")
+                {
+                    <i class="badge badge-info text-monospace">Employee</i>
+                }
+                else
+                {
+                    <i class="badge badge-primary text-monospace">Student</i>
+                }
+                <a href="/Admin/EditMember/@Model.Opno" class="btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+            </span>
         </div>
         <div class="card-body p-0">
             <table class="table table-responsive-sm justify-content-md-center table-striped table-borderless">
@@ -67,10 +81,6 @@
                         <td>@Html.DisplayFor(model => model.Child2)</td>
                     </tr>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Type)</th>
-                        <td>@Html.DisplayFor(model => model.Type)</td>
-                    </tr>
-                    <tr>
                         <th>@Html.DisplayNameFor(model => model.Child2)</th>
                         <td>@Html.DisplayFor(model => model.Child2)</td>
                     </tr>
@@ -78,6 +88,4 @@
             </table>
         </div>
     </div>
-<p>
-    @Html.ActionLink("Edit", "EditMember", new { id = Model.Opno }) |
-</p>
+
