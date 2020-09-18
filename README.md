@@ -8,8 +8,8 @@ This Project is done using Asp.Net Framework MVC
 * Windows operating system
 ---
 > Default admin Credentials
-``` admin@demo.com
-``` Admin@123
+``` admin@demo.com ```
+``` Admin@123 ```
 ---
 Default password for any new user entered by admin is User@123. The User can change it himself later
 > There is an admin and four roles entered into the datbase by default
