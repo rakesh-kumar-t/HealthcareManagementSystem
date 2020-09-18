@@ -4,6 +4,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.Opno)
     
 <div class="form align-items-center">
     <h6>Edit Member</h6>

@@ -19,7 +19,7 @@
         }
     }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @if (Session["DropDown"] != null)
+    @if (ViewBag.DrugList != null)
     {
         <div class="row form-group col-sm-4">
             @Html.Label("Helper","Suggested Medicine Names ")

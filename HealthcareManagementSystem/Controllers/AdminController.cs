@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Data.Entity;
 
 namespace HealthcareManagementSystem.Controllers
 {
@@ -151,7 +152,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(mbr).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(mbr).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -234,13 +235,13 @@ namespace HealthcareManagementSystem.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult EditStock(DrugHouse drug)
+        [ValidateAntiForgeryToken]
+        public ActionResult EditStock([Bind(Include ="DrugId,Name,ManufactureDate,ExpiryDate,StockLeft,Price")]DrugHouse drug)
         {
             if(ModelState.IsValid)
             {
-                db.Entry(drug).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(drug).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
             return View(drug);
         }
