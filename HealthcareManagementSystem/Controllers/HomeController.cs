@@ -72,9 +72,11 @@ namespace HealthcareManagementSystem.Controllers
                 else if (role == "Manager")
                     return RedirectToAction("Index", "Pharmacy");
                 else if (role == "Nurse")
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ViewPatient", "Home");
                 else if (role == "Pharmacy")
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ViewPatient", "Home");
+                else if (role == "Reception")
+                    return RedirectToAction("NewPatient", "Home");
                 else
                     return RedirectToAction("Index", "Home");
             }
@@ -113,6 +115,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult NewPatient()
         {
+            ViewBag.Memberlist = db.Members;
             return View();
         }
         [HttpPost]
