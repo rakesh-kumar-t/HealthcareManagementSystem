@@ -200,6 +200,8 @@ namespace HealthcareManagementSystem.Controllers
                     db.Pharmacies.Add(pharm);
                     db.SaveChanges();
                 }
+                ViewBag.PatientList = db.Patients;
+                ViewBag.DrugList = db.Pharmastocks;
                 return View(pharm);
             }
             else
