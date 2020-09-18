@@ -3,61 +3,73 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Members.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PatientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DoctorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Disease)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BillAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped text-center text-dark">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Members.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.PatientName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.DoctorName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Disease)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.BillAmount)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="table-info">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Members.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PatientName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DoctorName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Disease)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BillAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.PId }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.PId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.PId })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Members.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PatientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DoctorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disease)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PId })
-        </td>
-    </tr>
-}
 
-</table>
+    </table>
+</div>
