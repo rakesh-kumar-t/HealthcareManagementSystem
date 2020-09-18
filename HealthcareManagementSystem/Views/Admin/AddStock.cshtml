@@ -23,7 +23,7 @@
     {
         <div class="row form-group col-sm-4">
             @Html.Label("Helper","Suggested Medicine Names ")
-            @Html.DropDownList("Helper", Session["DropDown"] as SelectList, "Same medicine ?", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("Helper", new SelectList(ViewBag.DrugList, "DrugId", "Name"), "Select a medicine", htmlAttributes: new { @class = "form-control" })
         </div>
     }
 <div class="form-row">
