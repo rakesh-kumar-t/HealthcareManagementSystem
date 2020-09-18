@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Data.Entity;
 
 
 namespace HealthcareManagementSystem.Controllers
@@ -47,17 +48,43 @@ namespace HealthcareManagementSystem.Controllers
                 var Drug = db.DrugHouses.Find(DrugId);
                 if (Drug == null)
                 {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Drug Not found, Might have removed from stockhouse";
                     return HttpNotFound();
                 }
                 else
                 {
-                    Pharmastock pharm = new Pharmastock();
-                    pharm.DrugId=Drug.DrugId;
-                    pharm.Stockleft = (int)Itemno;
-                    pharm.Expiry = Drug.ExpiryDate;
-                    pharm.Dateadded = DateTime.Now;
-                    db.Pharmastocks.Add(pharm);
-                    db.SaveChanges();
+                    var pharmacy = db.Pharmastocks.Where(medicine => medicine.DrugId == DrugId).FirstOrDefault();
+                    if (pharmacy != null)
+                    {
+                        if (pharmacy.Stockleft > 0)
+                        {
+                            ViewBag.Status = "danger";
+                            ViewBag.Message = "Stock cant be added when old stock remains";
+                        }
+                        else
+                        {
+                            pharmacy.Stockleft = pharmacy.Stockleft + (int)Itemno;
+                            pharmacy.Expiry = Drug.ExpiryDate;
+                            pharmacy.Dateadded = DateTime.Now;
+                            db.Entry(pharmacy).State = EntityState.Modified;
+                            db.SaveChanges();
+                            ViewBag.Status = "success";
+                            ViewBag.Message = "Stock Updated successfully";
+                        }
+                    }
+                    else
+                    {
+                        Pharmastock pharm = new Pharmastock();
+                        pharm.DrugId=Drug.DrugId;
+                        pharm.Stockleft = (int)Itemno;
+                        pharm.Expiry = Drug.ExpiryDate;
+                        pharm.Dateadded = DateTime.Now;
+                        db.Pharmastocks.Add(pharm);
+                        db.SaveChanges();
+                        ViewBag.Status = "success";
+                        ViewBag.Message = "New drug added successfully";
+                    }
                 }
                 return View();
             }

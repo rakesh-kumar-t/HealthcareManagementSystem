@@ -20,7 +20,17 @@
         background-color: transparent;
     }
 </style>
-
+@{
+    if (ViewBag.Status != null)
+    {
+        <div class="alert alert-@ViewBag.Status alert-dismissible fade show w-50" role="alert">
+            @ViewBag.Message
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
 <h3 class="toast-header">DrugHouse Stock List</h3>
 <div class="table-responsive">
     <table class="table table-striped text-center text-dark">
