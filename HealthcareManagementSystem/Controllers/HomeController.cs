@@ -180,8 +180,9 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddMedicine()
         {
-            Session["DropDown"] = new SelectList(db.Patients, "PId", "PatientName");
-            Session["Pharmlist"] = new SelectList(db.Pharmastocks, "PharmId", "DrugHouses.Name");
+
+            ViewBag.Patientlist = db.Patients;
+            ViewBag.Druglist = db.Pharmastocks;
             return View();
         }
         [HttpPost]
