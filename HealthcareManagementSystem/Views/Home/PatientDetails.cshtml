@@ -4,108 +4,73 @@
     ViewBag.Title = "PatientDetails";
 }
 
-<h2>PatientDetails</h2>
-
-<div>
-    <h4>Patient</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Members.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Members.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PatientName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DoctorName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DoctorName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Disease)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Disease)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BillAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BillAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-    </dl>
+<ul class="card text-black-50 w-25">
+    <h3 class="card-title">
+        @Html.DisplayFor(model => model.PatientName)
+    </h3>
+    <li>
+        Type : @Html.DisplayFor(model => model.Type)
+    </li>
+    <li>
+        Doctor Name : @Html.DisplayFor(model => model.DoctorName)
+    </li>
+    <li>
+        Disease : @Html.DisplayFor(model => model.Disease)
+    </li>
+    <li>
+        Bill Amount : @Html.DisplayFor(model => model.BillAmount)
+    </li>
+    <li>
+        Date : @Html.DisplayFor(model => model.Date)
+    </li>
+    <li>
+        Opno Owner : @Html.DisplayFor(model => model.Members.Name)
+    </li>
+</ul>
     <!--Table for showing the medicines bought by the patient-->
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <tr>
-                <th>
-                    Medicine Name
-                </th>
-                <th>
-                    Date
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    TotalAmount
-                </th>
-            </tr>
-            @foreach (var item in Model.Pharmacies)
-            {
-
+            <thead class="thead-light">
                 <tr>
-                    <td>
-                        @Html.Display(item.Pharmastocks.DrugHouses.Name)
-                    </td>
-                    <td>
-                        @item.Quantity
-                    </td>
-                    <td>
-                        @Html.Display(item.Price.ToString())
-                    </td>
-                    <td>
-                        @Html.Display(item.Date.ToString())
-                    </td>
-                    <td>@{double totalamount = item.Quantity * item.Price;} @totalamount</td>
+                    <th>
+                        Medicine Name
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        TotalAmount
+                    </th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pharmacies)
+                {
+
+                    <tr class="table-info">
+                        <td>
+                            @item.Pharmastocks.DrugHouses.Name
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price.ToString()
+                        </td>
+                        <td>
+                            @item.Date.ToString()
+                        </td>
+                        <td>@{double totalamount = item.Quantity * item.Price;} @totalamount</td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
     <!--Table for viewing all the services of the patient-->
@@ -135,7 +100,7 @@
                 {
                     <tr class="table-info">
                         <td>
-                            @Html.Display(item.TestName)
+                            @item.TestName
                         </td>
                         <td>
                             @item.Quantity
@@ -154,7 +119,6 @@
             </tbody>
         </table>
     </div>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PId }) |
     @Html.ActionLink("Back to List", "Index")

@@ -165,7 +165,7 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddService(int? id)
         {
-            ViewBag.PatientList = db.Patients;
+            ViewBag.PatientList = db.Patients.ToList();
             if (id != null)
             {
                 var patient = db.Patients.Find((int)id);
@@ -184,8 +184,11 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception"||Session["Role"].ToString()=="Pharmacy")
             {
+                ViewBag.PatientList = db.Patients.ToList();
                 if (ModelState.IsValid)
                 {
+                    serve.Date = DateTime.Now;
+                    serve.TotalAmount = serve.Quantity * serve.Price;
                     db.Services.Add(serve);
                     db.SaveChanges();
                 }
@@ -197,10 +200,10 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddMedicine(int? id)
         {
-            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy" || Session["Role"].ToString() == "Reception")
+            if (Session["UserId"]!=null&&(Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy" || Session["Role"].ToString() == "Reception"))
             {
-                ViewBag.PatientList = db.Patients;
-                ViewBag.DrugList = db.Pharmastocks;
+                ViewBag.PatientList = db.Patients.ToList();
+                ViewBag.DrugList = db.Pharmastocks.ToList();
                 if (id != null)
                 {
                     var patient = db.Patients.Find((int)id);
@@ -225,11 +228,14 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
+                    pharm.Date = DateTime.Now;
+                    pharm.Price = pharmastock.Price;
                     db.Pharmacies.Add(pharm);
                     db.SaveChanges();
                 }
-                ViewBag.PatientList = db.Patients;
-                ViewBag.DrugList = db.Pharmastocks;
+                ViewBag.PatientList = db.Patients.ToList();
+                ViewBag.DrugList = db.Pharmastocks.ToList();
                 return View(pharm);
             }
             else
