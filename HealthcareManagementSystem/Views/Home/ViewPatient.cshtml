@@ -60,9 +60,8 @@
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.PId }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.PId }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.PId })
+                                @Html.ActionLink("Add Service", "AddService", "Home", new { id = item.PId }, new { @class = "btn btn-success btn-sm" }) |
+                                @Html.ActionLink("View Details", "Action Name", "Home", new { id = item.PId }, new {@class="btn btn-success btn-sm"}) |
                             </td>
                         </tr>
                     }
