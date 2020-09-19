@@ -64,6 +64,7 @@ namespace HealthcareManagementSystem.Controllers
                         else
                         {
                             pharmacy.Stockleft = pharmacy.Stockleft + (int)Itemno;
+                            pharmacy.Price = Drug.Price;
                             pharmacy.Expiry = Drug.ExpiryDate;
                             pharmacy.Dateadded = DateTime.Now;
                             db.Entry(pharmacy).State = EntityState.Modified;
@@ -79,6 +80,7 @@ namespace HealthcareManagementSystem.Controllers
                     {
                         Pharmastock pharm = new Pharmastock();
                         pharm.DrugId=Drug.DrugId;
+                        pharm.Price = Drug.Price;
                         pharm.Stockleft = (int)Itemno;
                         pharm.Expiry = Drug.ExpiryDate;
                         pharm.Dateadded = DateTime.Now;
