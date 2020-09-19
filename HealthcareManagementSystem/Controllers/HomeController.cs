@@ -87,15 +87,6 @@ namespace HealthcareManagementSystem.Controllers
             return View(Recept);
         }
 
-        [Authorize]
-        public ActionResult Reception()
-        {
-            string role = Session["Role"].ToString();
-            if (role == "Reception")
-                return View();
-            return RedirectToAction("Index", "Home");
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "The world perceives us as a low-cost Indian healthcare service provider; what we are engaged in is a passionate journey to establish ourselves as the lowest - cost, high - quality healthcare service provider in the world.At Clinic Relief, we are convinced that 'quality' and 'lowest cost' are not mutually exclusive when it comes to healthcare delivery.In fact, we are well on our way to demonstrate that we are not running our institution as just another number-only business, but are attractively placed to create an affordable, globally-benchmarked quality - driven healthcare services model.";
@@ -132,9 +123,10 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                db.Patients.Add(pt);
-                db.SaveChanges();
-                return RedirectToAction("Reception");
+                    pt.Date = DateTime.Now;
+                    db.Patients.Add(pt);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewPatient");
                 }
                 return View(pt);
             }
@@ -178,10 +170,16 @@ namespace HealthcareManagementSystem.Controllers
             return View(usr);
         }
         [Authorize]
-        public ActionResult AddService()
+        public ActionResult AddService(int? id)
         {
-
-            Session["DropDown"] = new SelectList(db.Patients, "PId", "PatientName");
+            ViewBag.PatientList = db.Patients;
+            var patient = db.Patients.Find((int)id);
+            if (patient != null)
+            {
+                Service service = new Service();
+                service.PId = (int)id;
+                return View(service);
+            }
             return View();
         }
         [HttpPost]
