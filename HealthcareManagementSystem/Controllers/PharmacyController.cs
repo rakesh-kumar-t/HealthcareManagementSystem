@@ -29,7 +29,6 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
             {
-                Session["DropDown"] = new SelectList(db.DrugHouses, "DrugId", "Name");
                 return View(db.DrugHouses.Where(d=>d.StockLeft>0).OrderBy(exp=>exp.ExpiryDate).ToList());
             }
             else
@@ -69,6 +68,9 @@ namespace HealthcareManagementSystem.Controllers
                             pharmacy.Dateadded = DateTime.Now;
                             db.Entry(pharmacy).State = EntityState.Modified;
                             db.SaveChanges();
+                            Drug.StockLeft = Drug.StockLeft - (int)Itemno;
+                            db.Entry(Drug).State = EntityState.Modified;
+                            db.SaveChanges();
                             ViewBag.Status = "success";
                             ViewBag.Message = "Stock Updated successfully";
                         }
@@ -82,11 +84,14 @@ namespace HealthcareManagementSystem.Controllers
                         pharm.Dateadded = DateTime.Now;
                         db.Pharmastocks.Add(pharm);
                         db.SaveChanges();
+                        Drug.StockLeft = Drug.StockLeft - (int)Itemno;
+                        db.Entry(Drug).State = EntityState.Modified;
+                        db.SaveChanges();
                         ViewBag.Status = "success";
                         ViewBag.Message = "New drug added successfully";
                     }
                 }
-                return View();
+                return View(db.DrugHouses.Where(d => d.StockLeft > 0).OrderBy(exp => exp.ExpiryDate).ToList());
             }
             else
                 return RedirectToAction("Index", "Home");
