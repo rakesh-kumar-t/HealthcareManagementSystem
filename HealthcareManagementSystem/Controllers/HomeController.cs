@@ -173,12 +173,15 @@ namespace HealthcareManagementSystem.Controllers
         public ActionResult AddService(int? id)
         {
             ViewBag.PatientList = db.Patients;
-            var patient = db.Patients.Find((int)id);
-            if (patient != null)
+            if (id != null)
             {
-                Service service = new Service();
-                service.PId = (int)id;
-                return View(service);
+                var patient = db.Patients.Find((int)id);
+                if (patient != null)
+                {
+                    Service service = new Service();
+                    service.PId = patient.PId;
+                    return View(service);
+                }
             }
             return View();
         }
@@ -199,12 +202,23 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
         }
         [Authorize]
-        public ActionResult AddMedicine()
+        public ActionResult AddMedicine(int? id)
         {
             if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy" || Session["Role"].ToString() == "Reception")
             {
                 ViewBag.PatientList = db.Patients;
                 ViewBag.DrugList = db.Pharmastocks;
+                if (id != null)
+                {
+                    var patient = db.Patients.Find((int)id);
+                    if (patient != null)
+                    {
+                        Pharmacy newmedicine = new Pharmacy();
+                        newmedicine.PId = patient.PId;
+                        return View(newmedicine);
+                    }
+
+                }
                 return View();
             }
             else
