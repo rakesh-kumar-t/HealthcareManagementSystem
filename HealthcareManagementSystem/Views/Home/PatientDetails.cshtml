@@ -67,6 +67,63 @@
         </dd>
 
     </dl>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Quantity)
+            </th>
+            <th>
+                @Html.DisplayForModel(item.Price)
+            </th>
+            <th>
+                @Html.DisplayForModel(item.Date)
+            </th>
+        </tr>
+        @foreach (var item in Model.Pharmacies)
+        {
+            
+                <tr>
+                    <td>
+                        @Html.DisplayFor(item.Pharmastocks.DrugHouses.Name)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(item.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.Date)
+                    </th>
+                </tr>
+            </table>
+        }
+        @foreach (var item in Model.Services)
+        {
+            <table>
+                <tr>
+
+                    <th>
+                        @Html.DisplayName(item.TestName)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.TotalAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayForModel(item.Date)
+                    </th>
+                </tr>
+            </table>
+        }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PId }) |
