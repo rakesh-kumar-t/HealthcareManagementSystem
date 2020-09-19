@@ -67,19 +67,23 @@
         </dd>
 
     </dl>
+    <!--Table for showing the medicines bought by the patient-->
     <table>
         <tr>
             <th>
-                @Html.DisplayNameFor(Name)
+                Medicine Name
             </th>
             <th>
-                @Html.DisplayNameFor(Quantity)
+                Date
             </th>
             <th>
-                @Html.DisplayForModel(item.Price)
+                Quantity
             </th>
             <th>
-                @Html.DisplayForModel(item.Date)
+                Price
+            </th>
+            <th>
+                TotalAmount
             </th>
         </tr>
         @foreach (var item in Model.Pharmacies)
@@ -87,43 +91,62 @@
             
                 <tr>
                     <td>
-                        @Html.DisplayFor(item.Pharmastocks.DrugHouses.Name)
+                        @Html.Display(item.Pharmastocks.DrugHouses.Name)
                     </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @Html.Display(item.Price.ToString())
+                    </td>
+                    <td>
+                        @Html.Display(item.Date.ToString())
+                    </td>
+                    <td>@{double totalamount = item.Quantity * item.Price;} @totalamount</td>
+                </tr>
+        }
+    </table>
+    <!--Table for viewing all the services of the patient-->
+            <table>
+                <tr>
                     <th>
-                        @Html.DisplayFor(item.Quantity)
+                        Test Name
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.Price)
+                        Quantity/NoofDays
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.Date)
+                        Price
+                    </th>
+                    <th>
+                        TotalAmount
+                    </th>
+                    <th>
+                        Date
                     </th>
                 </tr>
-            </table>
-        }
         @foreach (var item in Model.Services)
         {
-            <table>
                 <tr>
 
                     <th>
-                        @Html.DisplayName(item.TestName)
+                        @Html.Display(item.TestName)
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.Quantity)
+                        @item.Quantity
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.Price)
+                        @item.Price
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.TotalAmount)
+                        @item.TotalAmount
                     </th>
                     <th>
-                        @Html.DisplayForModel(item.Date)
+                        @item.Date
                     </th>
                 </tr>
-            </table>
         }
+            </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PId }) |

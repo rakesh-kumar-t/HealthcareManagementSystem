@@ -15,7 +15,7 @@ namespace HealthcareManagementSystem.Models
         public int PId { get; set; }//from Patient
         public int PharmId { get; set; }//foreign key from Pharmacy
         [Required]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
         [Required]
         public double Price { get; set; }
         public DateTime Date { get; set; }
