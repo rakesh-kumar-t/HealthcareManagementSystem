@@ -161,28 +161,7 @@ namespace HealthcareManagementSystem.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult Settings()
-        {
-            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
-                return View();
-            else
-                return RedirectToAction("Index", "Home");
-        }
-        [Authorize]
-        [HttpPost]
-        public ActionResult Settings(User usr)
-        {
-            string username = User.Identity.Name;
-            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Name = usr.Name;
-            user.Password = user.Password;
-            user.Confirmpassword = user.Password;
-            Session["Name"] = user.Name.ToString();
-            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            return View(usr);
-        }
+        
         [Authorize]
         public ActionResult AddService(int? id)
         {
@@ -262,6 +241,29 @@ namespace HealthcareManagementSystem.Controllers
 
 
         //COMMON METHODS FOR ALL USERS DEFINED HERE
+        //Change name for all users
+        [Authorize]
+        public ActionResult Settings()
+        {
+            if (Session["UserId"] != null)
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Settings(User usr)
+        {
+            string username = User.Identity.Name;
+            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+            user.Name = usr.Name;
+            user.Password = user.Password;
+            user.Confirmpassword = user.Password;
+            Session["Name"] = user.Name.ToString();
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return View(usr);
+        }
         //Change Password for user
         [Authorize]
         public ActionResult ChangePassword()
