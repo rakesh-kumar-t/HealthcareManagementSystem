@@ -48,9 +48,8 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.PharmId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.PharmId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.PharmId })
+                        @Html.ActionLink("Clearstock", "ClearStock",null, new { id = item.PharmId },new { @class = "btn btn-danger btn-sm" }) |
+                       
                     </td>
                 </tr>
             }
