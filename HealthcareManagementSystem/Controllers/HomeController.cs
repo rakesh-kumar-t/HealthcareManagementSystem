@@ -146,6 +146,20 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        //PatientDetails method
+        [Authorize]
+        public ActionResult PatientDetails(int? id)
+        {
+            if (id != null)
+            {
+              var patient=  db.Patients.Find(id);
+                if(patient!=null)
+                {
+                    return View(patient);
+                }
+            }
+            return View();
+        }
 
         [Authorize]
         public ActionResult Settings()
