@@ -87,15 +87,6 @@ namespace HealthcareManagementSystem.Controllers
             return View(Recept);
         }
 
-        [Authorize]
-        public ActionResult Reception()
-        {
-            string role = Session["Role"].ToString();
-            if (role == "Reception")
-                return View();
-            return RedirectToAction("Index", "Home");
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -133,9 +124,10 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                db.Patients.Add(pt);
-                db.SaveChanges();
-                return RedirectToAction("Reception");
+                    pt.Date = DateTime.Now;
+                    db.Patients.Add(pt);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewPatient");
                 }
                 return View(pt);
             }
@@ -179,10 +171,16 @@ namespace HealthcareManagementSystem.Controllers
             return View(usr);
         }
         [Authorize]
-        public ActionResult AddService()
+        public ActionResult AddService(int? id)
         {
-
-            Session["DropDown"] = new SelectList(db.Patients, "PId", "PatientName");
+            ViewBag.PatientList = db.Patients;
+            var patient = db.Patients.Find((int)id);
+            if (patient != null)
+            {
+                Service service = new Service();
+                service.PId = (int)id;
+                return View(service);
+            }
             return View();
         }
         [HttpPost]
