@@ -92,6 +92,20 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
         }
         [Authorize]
+        public ActionResult ClearStock(int? id)
+        {
+            if(id!=null)
+            {
+                var pharmacy = db.Pharmastocks.Find((int)id);
+                pharmacy.Stockleft = 0;
+                db.Entry(pharmacy).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.Status = "success";
+                ViewBag.Message = "Stocks Cleared Successfully";
+            }
+            return RedirectToAction("Index");
+        }
+        [Authorize]
         public ActionResult ViewReport()
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager"||Session["Role"].ToString() == "Admin")
