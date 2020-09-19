@@ -8,7 +8,7 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Members.Name)
+                    @Html.DisplayNameFor(model => model.Opno)
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.PatientName)
@@ -18,9 +18,6 @@
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.DoctorName)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Disease)
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.BillAmount)
@@ -39,7 +36,7 @@
                     {
                         <tr class="table-info">
                             <td>
-                                @Html.DisplayFor(modelItem => item.Members.Name)
+                                @Html.DisplayFor(modelItem => item.Opno)
                             </td>
                             <td>
                                 @Html.ActionLink(item.PatientName,"PatientDetails","Home",new { id=item.PId},new { @class="card-link"})
@@ -49,9 +46,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.DoctorName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Disease)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.BillAmount)
