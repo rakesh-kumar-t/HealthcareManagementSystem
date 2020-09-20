@@ -138,10 +138,27 @@ namespace HealthcareManagementSystem.Controllers
         }
         public ActionResult ViewPatient()
         {
-            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy"))
+            if (Session["UserId"] != null)
             {
-                return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
+                if (Session["Role"].ToString() == "Reception")
+                {
+                    return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
+                }
+                else if (Session["Role"].ToString() == "Nurse")
+                {
+                    return View(db.Patients.Where(a=>a.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList());
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    return View(db.Patients.Where(a => a.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
+            
             else
             {
                 return RedirectToAction("Index", "Home");
@@ -173,34 +190,45 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult AddService(int? id)
         {
-            ViewBag.PatientList = db.Patients.ToList();
-            if (id != null)
+            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" ))
             {
-                var patient = db.Patients.Find((int)id);
-                if (patient != null)
+                ViewBag.PatientList = db.Patients.ToList();
+                if (id != null)
                 {
-                    Service service = new Service();
-                    service.PId = patient.PId;
-                    return View(service);
+                    var patient = db.Patients.Find((int)id);
+                    if (patient != null)
+                    {
+                        Service service = new Service();
+                        service.PId = patient.PId;
+                        return View(service);
+                    }
                 }
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         [Authorize]
         public ActionResult AddService(Service serve)
         {
-            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception"||Session["Role"].ToString()=="Pharmacy")
+            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception")
             {
                 ViewBag.PatientList = db.Patients.ToList();
                 if (ModelState.IsValid)
                 {
                     serve.Date = DateTime.Now;
+                    if(serve.Patients.Members.Type== "Student")
+                    {
+                        serve.Price = 0;
+                    }
                     serve.TotalAmount = serve.Quantity * serve.Price;
                     db.Services.Add(serve);
                     db.SaveChanges();
                     var patient = db.Patients.Find(serve.PId);
-                    patient.BillAmount += serve.Price;
+                    patient.BillAmount += serve.TotalAmount;
                     db.Entry(patient).State =EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
@@ -245,6 +273,10 @@ namespace HealthcareManagementSystem.Controllers
                     var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
                     pharm.Date = DateTime.Now;
                     pharm.Price = pharmastock.Price;
+                    if (pharm.Patients.Members.Type == "Student")
+                    {
+                        pharm.Price = 0;
+                    }
                     pharm.TotalAmount = pharm.Quantity * pharm.Price;
                     db.Pharmacies.Add(pharm);
                     db.SaveChanges();

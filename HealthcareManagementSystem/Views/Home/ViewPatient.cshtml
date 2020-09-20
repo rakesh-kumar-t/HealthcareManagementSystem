@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<HealthcareManagementSystem.Models.Patient>
 
-<p>
-    @Html.ActionLink("AddPatient", "NewPatient", "Home", new { @class = "btn btn-info mb-2" })
-</p>
+@if (Session["Role"].ToString() == "Reception")
+{
+    <p>
+        @Html.ActionLink("AddPatient", "NewPatient", "Home", new { @class = "btn btn-info mb-2" })
+    </p>
+}
 <div class="table-responsive">
     <table class="table table-striped text-center text-dark">
         <thead class="thead-light">
@@ -54,7 +57,10 @@
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
                             <td>
-                                @Html.ActionLink("Add Service", "AddService", "Home", new { id = item.PId }, new { @class = "btn btn-info btn-sm" }) 
+                                @if (Session["Role"].ToString() != "Pharmacy")
+                                {
+                                    @Html.ActionLink("Add Service", "AddService", "Home", new { id = item.PId }, new { @class = "btn btn-info btn-sm" }) 
+                                }
                                 @Html.ActionLink("Add Medicine", "AddMedicine", "Home", new { id = item.PId }, new {@class="btn btn-success btn-sm"}) 
                             </td>
                         </tr>

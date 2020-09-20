@@ -8,7 +8,7 @@
 
 <div class="table-responsive">
     <table class="table table-striped text-center text-dark">
-        <thead class="thead-light">
+        <thead class="thead bg-info">
             <tr>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.DrugHouses.Name)
@@ -48,7 +48,7 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        @Html.ActionLink("Clearstock", "ClearStock",null, new { id = item.PharmId },new { @class = "btn btn-danger btn-sm" }) |
+                        @Html.ActionLink("Clearstock", "ClearStock",null, new { id = item.PharmId },new { @class = "btn btn-danger btn-sm" })
                        
                     </td>
                 </tr>
