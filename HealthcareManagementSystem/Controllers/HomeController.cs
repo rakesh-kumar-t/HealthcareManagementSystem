@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Data.Entity;
 
 
 namespace HealthcareManagementSystem.Controllers
@@ -193,7 +194,7 @@ namespace HealthcareManagementSystem.Controllers
                     db.SaveChanges();
                     var patient = db.Patients.Find(serve.PId);
                     patient.BillAmount += serve.Price;
-                    db.Entry(patient).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(patient).State =EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New service added to patient successfully";
@@ -241,7 +242,7 @@ namespace HealthcareManagementSystem.Controllers
                     db.SaveChanges();
                     var patient = db.Patients.Find(pharm.PId);
                     patient.BillAmount += pharm.Price;
-                    db.Entry(patient).State= System.Data.Entity.EntityState.Modified;
+                    db.Entry(patient).State=EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New medicine added to patient successfully";
