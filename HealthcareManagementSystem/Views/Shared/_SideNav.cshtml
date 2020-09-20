@@ -105,12 +105,15 @@
                         </div>
                     </a>
                 }
-                <a href="/Home/AddService" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-file-text fa-fw mr-3"></span>
-                        <span class="menu-collapsed">Add Services</span>
-                    </div>
-                </a>
+                if (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse")
+                {
+                    <a href="/Home/AddService" class="bg-dark list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-start align-items-center">
+                            <span class="fa fa-file-text fa-fw mr-3"></span>
+                            <span class="menu-collapsed">Add Services</span>
+                        </div>
+                    </a>
+                }
                 <a href="/Home/AddMedicine" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-file-text fa-fw mr-3"></span>
