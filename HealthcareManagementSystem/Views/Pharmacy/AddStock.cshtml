@@ -32,10 +32,10 @@
         </div>
     }
 }
-<h3 class="toast-header">DrugHouse Stock List</h3>
+<h3 class="toast-header" style="background-color:#bee5eb">DrugHouse Stock List</h3>
 <div class="table-responsive">
-    <table class="table table-striped text-center text-dark">
-        <thead class="thead-light">
+    <table class="table table-striped text-center text-dark table-info">
+        <thead class="thead bg-info">
             <tr>
                 <th scope="col">
                     No
@@ -97,7 +97,7 @@
                                     }
                                     <div class="col-5 text-right">Qty: </div>
                                     <div class="input-group col-6">
-                                        @Html.TextBox("Itemno", "1", new { @class = "form-control-sm col-sm-4", @type = "number", @min = min ,@max=max})
+                                        @Html.TextBox("Itemno", "1", new { @class = "form-control-sm col-sm-6", @type = "number", @min = min ,@max=max})
                                         @Html.Hidden("DrugId", @item.DrugId)
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Add To Pharmacy"><i class="fa fa-download"></i></button>

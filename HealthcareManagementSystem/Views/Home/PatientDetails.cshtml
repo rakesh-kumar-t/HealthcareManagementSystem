@@ -4,126 +4,118 @@
     ViewBag.Title = "PatientDetails";
 }
 
-    @Html.ActionLink(" Goback", "ViewPatient", "Home", null, new { @class= "btn btn-info btn-sm fa fa-step-backward" })
-    <hr />
-    <div class="card bg-info p-3 ">
-        <div class="card-header"><img src="~/Images/Logo.jpg" height="30px" style="border-radius:50%;border:2px solid white" /> CLINIC RELIEF</div>
-        <p style="text-align:left;" class="h5">
-            @Html.DisplayFor(model => model.PatientName)
-            <span style="float:right;">
-                Doctor : @Html.DisplayFor(model => model.DoctorName)
-            </span>
-        </p>
-        
-        <div class="text-black-50 w-25 justify-content-center">
-            <p>
-                Type : @Html.DisplayFor(model => model.Type)
-            </p>
-            <p>
-                
-            </p>
-            <p>
-                Disease : @Html.DisplayFor(model => model.Disease)
-            </p>
-            <p>
-                Bill Amount : @Html.DisplayFor(model => model.BillAmount)
-            </p>
-            <p>
-                Date : @Html.DisplayFor(model => model.Date)
-            </p>
-            <p>
-                Opno Owner : @Html.DisplayFor(model => model.Members.Name)
-            </p>
-        </div>
-        <!--Table for showing the medicines bought by the patient-->
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead class="thead-light">
-                    <tr>
-                        <th>
-                            Medicine Name
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Quantity
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th>
-                            TotalAmount
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Pharmacies)
-                    {
-
-                        <tr class="table-info">
-                            <td>
-                                @item.Pharmastocks.DrugHouses.Name
-                            </td>
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td>
-                                @item.Price.ToString()
-                            </td>
-                            <td>
-                                @item.Date.ToString()
-                            </td>
-                            <td>@{double totalamount = item.Quantity * item.Price;} @totalamount</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <!--Table for viewing all the services of the patient-->
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead class="thead-light">
-                    <tr>
-                        <th>
-                            Test Name
-                        </th>
-                        <th>
-                            Quantity/NoofDays
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th>
-                            TotalAmount
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Services)
-                    {
-                        <tr class="table-info">
-                            <td>
-                                @item.TestName
-                            </td>
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td>
-                                @item.Price
-                            </td>
-                            <td>
-                                @item.TotalAmount
-                            </td>
-                            <td>
-                                @item.Date
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+<div class="justify-content-center text-left">
+    @Html.ActionLink(" Goback", "ViewPatient", "Home", null, new { @class= "btn btn-info fa fa-step-backward mb-2" })
+    <span class="text-right" style=" margin-left: 80%; ">
+        <button onclick="print()" class="btn btn-success fa fa-print mb-2">Print</button>
+        </span>
+</div>
+<div class="card p-3" style="background-color:#bee5eb" id="section-to-print">
+    <div class="card-header text-left bg-info">
+        <img src="~/Images/Logo.jpg" height="30px" style="border-radius:50%;border:2px solid white;" /> <span style="font-family: 'Righteous', cursive;">CLINIC RELIEF </span>
+        <span style="float:right;">
+            Bill Summary
+        </span>
     </div>
+    <p style="text-align:left;" class="mt-1 text-black-50">
+        <span class="h5">@Html.DisplayFor(model => model.PatientName)</span>
+        <span style="float:right;">
+            Date : @Html.DisplayFor(model => model.Date)<br />
+            Doctor : Dr.@Html.DisplayFor(model => model.DoctorName)
+        </span>
+        <br />
+        Type : @Html.DisplayFor(model => model.Type)
+    </p>
+
+    <div class="text-black-50 w-25 justify-content-center">
+        <p>
+            Disease : @Html.DisplayFor(model => model.Disease)
+        </p>
+        <p>
+        </p>
+
+        <p>
+            Opno Owner : @Html.DisplayFor(model => model.Members.Name)
+            <i class="badge badge-pill">
+                (@Html.DisplayFor(model => model.Members.Type))
+            </i>
+        </p>
+
+    </div>
+    @if (Model.Pharmacies.ToList().Count > 0|| Model.Services.ToList().Count > 0)
+    { 
+        <!--Table for showing the medicines bought by the patient-->
+        <div class="table-responsive-sm mt-2">
+        <strong class="text-black-50">Bill Summary</strong>
+        <table class="table table-striped table-sm small">
+            <thead class="thead">
+                <tr>
+                    <th>
+                        Medicine/Test Name
+                    </th>
+                    <th>
+                        Quantity/NoofDays
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        TotalAmount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pharmacies)
+                {
+                    <tr class="table-info">
+                        <td>
+                            @item.Pharmastocks.DrugHouses.Name
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.Date.ToShortDateString()
+                        </td>
+                        <td>
+                            @item.TotalAmount
+                        </td>
+                    </tr>
+                }
+                <!--Table for viewing all the services of the patient-->
+                @foreach (var item in Model.Services)
+                {
+                    <tr class="table-info">
+                        <td>
+                            @item.TestName
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.Date.ToShortDateString()
+                        </td>
+                        <td>
+                            @item.TotalAmount
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+
+    
+    <p class="font-weight-bolder text-right mr-4 text-black-50">Grand Total : @Html.DisplayFor(model => model.BillAmount)</p>
+    <p class="text-muted text-right small">(Total includes registration charges and doctor fee)</p>
+</div>

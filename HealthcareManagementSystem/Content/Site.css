@@ -1,5 +1,25 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+/*Print customization for patient details page*/
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #section-to-print, #section-to-print * {
+        visibility: visible;
+    }
+
+    #section-to-print {
+        position: fixed;
+        left: 0!important;
+        top: 0;
+        margin-left:0px!important;
+        width:100%;
+    }
+}
+
 #body-row {
     margin-left: 0;
     margin-right: 0;

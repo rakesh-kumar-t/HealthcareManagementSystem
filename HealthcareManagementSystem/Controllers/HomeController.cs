@@ -53,7 +53,24 @@ namespace HealthcareManagementSystem.Controllers
                 db.Users.Add(admin);
                 db.SaveChanges();
             }
-            return View();
+            if (Session["Role"] != null)
+            {
+                string role = Session["Role"].ToString();
+                if (role == "Admin")
+                    return RedirectToAction("Index", "Admin");
+                else if (role == "Manager")
+                    return RedirectToAction("Index", "Pharmacy");
+                else if (role == "Nurse")
+                    return RedirectToAction("ViewPatient", "Home");
+                else if (role == "Pharmacy")
+                    return RedirectToAction("ViewPatient", "Home");
+                else if (role == "Reception")
+                    return RedirectToAction("ViewPatient", "Home");
+                else
+                    return View();
+            }
+            else
+                return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -128,6 +145,13 @@ namespace HealthcareManagementSystem.Controllers
                     db.Patients.Add(pt);
                     db.SaveChanges();
                     return RedirectToAction("ViewPatient");
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "New patient Registered";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Insufficient data";
                 }
                 return View(pt);
             }
@@ -138,10 +162,27 @@ namespace HealthcareManagementSystem.Controllers
         }
         public ActionResult ViewPatient()
         {
-            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy"))
+            if (Session["UserId"] != null)
             {
-                return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
+                if (Session["Role"].ToString() == "Reception")
+                {
+                    return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
+                }
+                else if (Session["Role"].ToString() == "Nurse")
+                {
+                    return View(db.Patients.Where(a=>a.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList());
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    return View(db.Patients.Where(a => a.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
+            
             else
             {
                 return RedirectToAction("Index", "Home");
@@ -151,53 +192,76 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult PatientDetails(int? id)
         {
-            if (id != null)
+            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy"))
             {
-              var patient=  db.Patients.Find(id);
-                if(patient!=null)
+                if (id != null)
                 {
-                    return View(patient);
+                  var patient=  db.Patients.Find(id);
+                    if(patient!=null)
+                    {
+                        return View(patient);
+                    }
                 }
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         
         [Authorize]
         public ActionResult AddService(int? id)
         {
-            ViewBag.PatientList = db.Patients.ToList();
-            if (id != null)
+            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" ))
             {
-                var patient = db.Patients.Find((int)id);
-                if (patient != null)
+                ViewBag.PatientList = db.Patients.ToList();
+                if (id != null)
                 {
-                    Service service = new Service();
-                    service.PId = patient.PId;
-                    return View(service);
+                    var patient = db.Patients.Find((int)id);
+                    if (patient != null)
+                    {
+                        Service service = new Service();
+                        service.PId = patient.PId;
+                        return View(service);
+                    }
                 }
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         [Authorize]
         public ActionResult AddService(Service serve)
         {
-            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception"||Session["Role"].ToString()=="Pharmacy")
+            if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception")
             {
                 ViewBag.PatientList = db.Patients.ToList();
                 if (ModelState.IsValid)
                 {
                     serve.Date = DateTime.Now;
+                    if(serve.Patients.Members.Type== "Student")
+                    {
+                        serve.Price = 0;
+                    }
                     serve.TotalAmount = serve.Quantity * serve.Price;
                     db.Services.Add(serve);
                     db.SaveChanges();
                     var patient = db.Patients.Find(serve.PId);
-                    patient.BillAmount += serve.Price;
+                    patient.BillAmount += serve.TotalAmount;
                     db.Entry(patient).State =EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New service added to patient successfully";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Insufficient details";
                 }
                 return View(serve);
             }
@@ -238,10 +302,15 @@ namespace HealthcareManagementSystem.Controllers
                     var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
                     pharm.Date = DateTime.Now;
                     pharm.Price = pharmastock.Price;
+                    if (pharm.Patients.Members.Type == "Student")
+                    {
+                        pharm.Price = 0;
+                    }
+                    pharm.TotalAmount = pharm.Quantity * pharm.Price;
                     db.Pharmacies.Add(pharm);
                     db.SaveChanges();
                     var patient = db.Patients.Find(pharm.PId);
-                    patient.BillAmount += pharm.Price;
+                    patient.BillAmount += pharm.TotalAmount;
                     db.Entry(patient).State=EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
