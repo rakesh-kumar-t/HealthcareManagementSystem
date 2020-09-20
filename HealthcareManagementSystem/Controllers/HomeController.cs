@@ -145,6 +145,13 @@ namespace HealthcareManagementSystem.Controllers
                     db.Patients.Add(pt);
                     db.SaveChanges();
                     return RedirectToAction("ViewPatient");
+                    ViewBag.Status = "success";
+                    ViewBag.Message = "New patient Registered";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Insufficient data";
                 }
                 return View(pt);
             }
@@ -250,6 +257,11 @@ namespace HealthcareManagementSystem.Controllers
                     db.SaveChanges();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New service added to patient successfully";
+                }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Insufficient details";
                 }
                 return View(serve);
             }
