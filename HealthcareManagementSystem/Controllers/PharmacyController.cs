@@ -29,6 +29,10 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
             {
+                ViewBag.Status = Session["Status"];
+                ViewBag.Message = Session["Message"];
+                Session["Status"] = "";
+                Session["Message"] = "";
                 return View(db.DrugHouses.Where(d=>d.StockLeft>0).OrderBy(exp=>exp.ExpiryDate).ToList());
             }
             else
@@ -47,8 +51,8 @@ namespace HealthcareManagementSystem.Controllers
                 DateTime alloweddate = DateTime.Now.AddMinutes(2);
                 if (Drug == null)
                 {
-                    ViewBag.Status = "danger";
-                    ViewBag.Message = "Drug Not found, Might have removed from stockhouse";
+                    Session["Status"] = "danger";
+                    Session["Message"] = "Drug Not found, Might have removed from stockhouse";
                     return HttpNotFound();
                 }
                 else
@@ -58,8 +62,8 @@ namespace HealthcareManagementSystem.Controllers
                     {
                         if (pharmacy.Stockleft > 0)
                         {
-                            ViewBag.Status = "danger";
-                            ViewBag.Message = "Stock cant be added when old stock remains";
+                            Session["Status"] = "danger";
+                            Session["Message"] = "Stock cant be added when old stock remains";
                         }
                         else
                         {
@@ -73,8 +77,8 @@ namespace HealthcareManagementSystem.Controllers
                             Drug.StockLeft = Drug.StockLeft - (int)Itemno;
                             db.Entry(Drug).State = EntityState.Modified;
                             db.SaveChanges();
-                            ViewBag.Status = "success";
-                            ViewBag.Message = "Stock Updated successfully";
+                            Session["Status"] = "success";
+                            Session["Message"] = "Stock Updated successfully";
                         }
                     }
                     else
@@ -90,11 +94,11 @@ namespace HealthcareManagementSystem.Controllers
                         Drug.StockLeft = Drug.StockLeft - (int)Itemno;
                         db.Entry(Drug).State = EntityState.Modified;
                         db.SaveChanges();
-                        ViewBag.Status = "success";
-                        ViewBag.Message = "New drug added successfully";
+                        Session["Status"] = "success";
+                        Session["Message"] = "New drug added successfully";
                     }
                 }
-                return View(db.DrugHouses.Where(d => d.StockLeft > 0).OrderBy(exp => exp.ExpiryDate).ToList());
+                return RedirectToAction("AddStock");
             }
             else
                 return RedirectToAction("Index", "Home");
