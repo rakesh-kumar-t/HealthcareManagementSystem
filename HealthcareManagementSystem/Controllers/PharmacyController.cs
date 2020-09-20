@@ -32,8 +32,7 @@ namespace HealthcareManagementSystem.Controllers
                 return View(db.DrugHouses.Where(d=>d.StockLeft>0).OrderBy(exp=>exp.ExpiryDate).ToList());
             }
             else
-                return RedirectToAction("Index", "Home");
-        }
+                return RedirectToAction("Index", "Home");        }
         [Authorize]
         [HttpPost]
         public ActionResult AddStock(int? DrugId,int? Itemno)
@@ -45,6 +44,7 @@ namespace HealthcareManagementSystem.Controllers
                     return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
                 }
                 var Drug = db.DrugHouses.Find(DrugId);
+                DateTime alloweddate = DateTime.Now.AddMinutes(2);
                 if (Drug == null)
                 {
                     ViewBag.Status = "danger";
@@ -53,7 +53,7 @@ namespace HealthcareManagementSystem.Controllers
                 }
                 else
                 {
-                    var pharmacy = db.Pharmastocks.Where(medicine => medicine.DrugId == DrugId).FirstOrDefault();
+                    var pharmacy = db.Pharmastocks.Where(medicine => medicine.DrugId == DrugId||medicine.DrugHouses.Name==Drug.Name).FirstOrDefault();
                     if (pharmacy != null)
                     {
                         if (pharmacy.Stockleft > 0)
@@ -65,6 +65,7 @@ namespace HealthcareManagementSystem.Controllers
                         {
                             pharmacy.Stockleft = pharmacy.Stockleft + (int)Itemno;
                             pharmacy.Price = Drug.Price;
+                            pharmacy.DrugId = Drug.DrugId;
                             pharmacy.Expiry = Drug.ExpiryDate;
                             pharmacy.Dateadded = DateTime.Now;
                             db.Entry(pharmacy).State = EntityState.Modified;
