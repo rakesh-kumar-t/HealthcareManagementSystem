@@ -181,15 +181,34 @@ textarea {
     outline: 0px !important;
     max-width: 100%;
 }
-
-.card {
-   
-    background-color: rgba(0,0,0,.6);
+.container {
+    height:75vh;
+    width:50%;
+    background: rgba(0,0,0,.6);
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+.img {
+    height: 70px;
+    width: 70px;
+    background: url('../images/logo.jpg')no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.container h1{
+    color:white;
+    margin-top:80px;
+}
+.container p{
+    color:white;
+    margin-top:40px;
+    text-align:justify;
 }
 
-
-
-.card-body {
-    font-size:large;
-    opacity: 1
-}

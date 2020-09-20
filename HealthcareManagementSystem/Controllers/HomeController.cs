@@ -90,7 +90,7 @@ namespace HealthcareManagementSystem.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "The world perceives us as a low-cost Indian healthcare service provider; what we are engaged in is a passionate journey to establish ourselves as the lowest - cost, high - quality healthcare service provider in the world.At Clinic Relief, we are convinced that 'quality' and 'lowest cost' are not mutually exclusive when it comes to healthcare delivery.In fact, we are well on our way to demonstrate that we are not running our institution as just another number-only business, but are attractively placed to create an affordable, globally-benchmarked quality - driven healthcare services model.";
+            ViewBag.Message = "The world perceives us as a low-cost Indian healthcare service provider; what we are engaged in is a passionate journey to establish ourselves as the lowest-cost, high-quality healthcare service provider in the world.At Clinic Relief, we are convinced that 'quality' and 'lowest cost' are not mutually exclusive when it comes to healthcare delivery.In fact, we are well on our way to demonstrate that we are not running our institution as just another number-only business, but are attractively placed to create an affordable, globally-benchmarked quality - driven healthcare services model.";
             return View();
         }
 
