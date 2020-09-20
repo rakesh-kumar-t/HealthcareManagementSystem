@@ -118,7 +118,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager"||Session["Role"].ToString() == "Admin")
             {
-                return View(db.Pharmacies.ToList());
+                return View(db.Patients.ToList());
             }
             else
             {

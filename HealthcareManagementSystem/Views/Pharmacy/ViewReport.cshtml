@@ -1,58 +1,96 @@
-﻿@model IEnumerable<HealthcareManagementSystem.Models.Pharmacy>
+﻿@model IEnumerable<HealthcareManagementSystem.Models.Patient>
+
+@{
+    ViewBag.Title = "ViewReport";
+}
+
+<h2>ViewReport</h2>
+
 
 
 <div class="table-responsive">
     <table class="table table-striped text-center text-dark">
-        <thead class="thead-light">
+        <thead class="thead bg-info">
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Patients.PatientName)
+                    Member Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Quantity)
+                    @Html.DisplayNameFor(model => model.PatientName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Price)
+                    Medicine/Test Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Date)
+                    Quantity/NoOfDays
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.TotalAmount)
+                    Date
                 </th>
-                <th>Action</th>
+                <th scope="col">
+                    Total Amount
+                </th>
+
             </tr>
         </thead>
         <tbody>
-            @{
-                if (Model != null)
-                {
-                    foreach (var item in Model)
-                    {
-                        <tr class="table-info">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Patients.PatientName)
-                            </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TotalAmount)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            </td>
+            @foreach (var item in Model)
+            
+                {
+                foreach (var medicine in item.Pharmacies)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Members.Name)
+                        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @medicine.Quantity
+                </td>
+                <td>
+                    @medicine.Price
+                </td>
+                <td>
+                    @medicine.Date.ToShortDateString()
+                </td>
+                <td>
+                    @medicine.TotalAmount
+                </td>
                         </tr>
-                    }
-                    }
                 }
+                foreach (var service in item.Services)
+                {
+                    <tr>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.Members.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @service.TestName
+                </td>
+                <td>
+                    @service.Quantity
+                </td>
+                <td>
+                    @service.Price
+                </td>
+                <td>
+                    @service.Date.ToShortDateString()
+                </td>
+                <td>
+                    @service.TotalAmount
+                </td>
+</tr>
+                }
+       
+        }
+
             </tbody>
-            </table>
+
+        </table>
     </div>
