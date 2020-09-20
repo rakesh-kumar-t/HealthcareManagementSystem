@@ -105,14 +105,23 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    string password = "User@123";//Default password for Every User , User can change password after login
-                    user.Password = HomeController.Encrypt(password);
-                    user.Confirmpassword = HomeController.Encrypt(password);
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    ModelState.Clear();
-                    ViewBag.Status = "success";
-                    ViewBag.Message = "User Added Successfully";
+                    var userexist = db.Users.Find(user.UserId);
+                    if (userexist == null)
+                    {
+                        string password = "User@123";//Default password for Every User , User can change password after login
+                        user.Password = HomeController.Encrypt(password);
+                        user.Confirmpassword = HomeController.Encrypt(password);
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        ModelState.Clear();
+                        ViewBag.Status = "success";
+                        ViewBag.Message = "User Added Successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Status = "danger";
+                        ViewBag.Message = "Userid already exists";
+                    }
                 }    
                 else
                 {
