@@ -4,15 +4,20 @@
     ViewBag.Title = "PatientDetails";
 }
 
-    @Html.ActionLink(" Goback", "ViewPatient", "Home", null, new { @class= "btn btn-info btn-sm fa fa-step-backward mb-2" })
-<div class="card bg-info p-3 ">
-    <div class="card-header text-left">
+<div class="justify-content-center text-left">
+    @Html.ActionLink(" Goback", "ViewPatient", "Home", null, new { @class= "btn btn-info fa fa-step-backward mb-2" })
+    <span class="text-right" style=" margin-left: 80%; ">
+        <button onclick="print()" class="btn btn-success fa fa-print mb-2">Print</button>
+        </span>
+</div>
+<div class="card p-3" style="background-color:#bee5eb" id="section-to-print">
+    <div class="card-header text-left bg-info">
         <img src="~/Images/Logo.jpg" height="30px" style="border-radius:50%;border:2px solid white;" /> <span style="font-family: 'Righteous', cursive;">CLINIC RELIEF </span>
         <span style="float:right;">
             Bill Summary
         </span>
     </div>
-    <p style="text-align:left;" class="mt-1">
+    <p style="text-align:left;" class="mt-1 text-black-50">
         <span class="h5">@Html.DisplayFor(model => model.PatientName)</span>
         <span style="float:right;">
             Date : @Html.DisplayFor(model => model.Date)<br />
@@ -33,9 +38,11 @@
             Opno Owner : @Html.DisplayFor(model => model.Members.Name)
         </p>
     </div>
+    @if (Model.Pharmacies.ToList().Count > 0)
+    {
     <!--Table for showing the medicines bought by the patient-->
     <div class="table-responsive-sm mt-2">
-        <strong>Medicine Summary</strong>
+        <strong class="text-black-50">Medicine Summary</strong>
         <table class="table table-striped table-sm small">
             <thead class="thead">
                 <tr>
@@ -81,9 +88,13 @@
             </tbody>
         </table>
     </div>
+
+    }
+    @if (Model.Services.ToList().Count > 0)
+    {
     <!--Table for viewing all the services of the patient-->
     <div class="table-responsive">
-        <strong>Test Summary</strong>
+        <strong class="text-black-50">Test Summary</strong>
         <table class="table table-striped table-sm small">
             <thead class="thead">
                 <tr>
@@ -128,5 +139,7 @@
             </tbody>
         </table>
     </div>
-    <p class="font-weight-bolder text-right mr-4">Grand Total : @Html.DisplayFor(model => model.BillAmount)</p>
+
+    }
+    <p class="font-weight-bolder text-right mr-4 text-black-50">Grand Total : @Html.DisplayFor(model => model.BillAmount)</p>
 </div>
