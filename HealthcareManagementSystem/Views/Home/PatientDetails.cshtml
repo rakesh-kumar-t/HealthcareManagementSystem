@@ -36,21 +36,25 @@
 
         <p>
             Opno Owner : @Html.DisplayFor(model => model.Members.Name)
+            <i class="badge badge-pill">
+                (@Html.DisplayFor(model => model.Members.Type))
+            </i>
         </p>
+
     </div>
-    @if (Model.Pharmacies.ToList().Count > 0)
-    {
-    <!--Table for showing the medicines bought by the patient-->
-    <div class="table-responsive-sm mt-2">
-        <strong class="text-black-50">Medicine Summary</strong>
+    @if (Model.Pharmacies.ToList().Count > 0|| Model.Services.ToList().Count > 0)
+    { 
+        <!--Table for showing the medicines bought by the patient-->
+        <div class="table-responsive-sm mt-2">
+        <strong class="text-black-50">Bill Summary</strong>
         <table class="table table-striped table-sm small">
             <thead class="thead">
                 <tr>
                     <th>
-                        Medicine Name
+                        Medicine/Test Name
                     </th>
                     <th>
-                        Quantity
+                        Quantity/NoofDays
                     </th>
                     <th>
                         Price
@@ -66,7 +70,6 @@
             <tbody>
                 @foreach (var item in Model.Pharmacies)
                 {
-
                     <tr class="table-info">
                         <td>
                             @item.Pharmastocks.DrugHouses.Name
@@ -85,37 +88,7 @@
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
-    </div>
-
-    }
-    @if (Model.Services.ToList().Count > 0)
-    {
-    <!--Table for viewing all the services of the patient-->
-    <div class="table-responsive">
-        <strong class="text-black-50">Test Summary</strong>
-        <table class="table table-striped table-sm small">
-            <thead class="thead">
-                <tr>
-                    <th>
-                        Test Name
-                    </th>
-                    <th>
-                        Quantity/NoofDays
-                    </th>
-                    <th>
-                        Price
-                    </th>
-                    <th>
-                        TotalAmount
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
+                <!--Table for viewing all the services of the patient-->
                 @foreach (var item in Model.Services)
                 {
                     <tr class="table-info">
@@ -129,17 +102,20 @@
                             @item.Price
                         </td>
                         <td>
-                            @item.TotalAmount
+                            @item.Date.ToShortDateString()
                         </td>
                         <td>
-                            @item.Date
+                            @item.TotalAmount
                         </td>
                     </tr>
                 }
+
             </tbody>
         </table>
     </div>
+}
 
-    }
+    
     <p class="font-weight-bolder text-right mr-4 text-black-50">Grand Total : @Html.DisplayFor(model => model.BillAmount)</p>
+    <p class="text-muted text-right small">(Total includes registration charges and doctor fee)</p>
 </div>
