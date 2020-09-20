@@ -223,7 +223,7 @@ namespace HealthcareManagementSystem.Controllers
                     ModelState.AddModelError("", "Invalid Data Format.");
                 }
                 ViewBag.DrugList = db.DrugHouses;
-                return View(drug);
+                return View();
             }
             else
                 return RedirectToAction("Index", "Home");
