@@ -18,6 +18,7 @@ namespace HealthcareManagementSystem.Models
         public int Quantity { get; set; }
         [Required]
         public double Price { get; set; }
+        public double TotalAmount { get; set; }
         public DateTime Date { get; set; }
 
         //Foreign key references

@@ -151,15 +151,22 @@ namespace HealthcareManagementSystem.Controllers
         [Authorize]
         public ActionResult PatientDetails(int? id)
         {
-            if (id != null)
+            if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy"))
             {
-              var patient=  db.Patients.Find(id);
-                if(patient!=null)
+                if (id != null)
                 {
-                    return View(patient);
+                  var patient=  db.Patients.Find(id);
+                    if(patient!=null)
+                    {
+                        return View(patient);
+                    }
                 }
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         
@@ -238,10 +245,11 @@ namespace HealthcareManagementSystem.Controllers
                     var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
                     pharm.Date = DateTime.Now;
                     pharm.Price = pharmastock.Price;
+                    pharm.TotalAmount = pharm.Quantity * pharm.Price;
                     db.Pharmacies.Add(pharm);
                     db.SaveChanges();
                     var patient = db.Patients.Find(pharm.PId);
-                    patient.BillAmount += pharm.Price;
+                    patient.BillAmount += pharm.TotalAmount;
                     db.Entry(patient).State=EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Status = "success";
