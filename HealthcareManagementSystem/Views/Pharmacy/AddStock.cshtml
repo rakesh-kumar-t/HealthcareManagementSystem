@@ -23,6 +23,7 @@
 @{
     if (ViewBag.Status != null)
     {
+        
         <div class="alert alert-@ViewBag.Status alert-dismissible fade show w-50" role="alert">
             @ViewBag.Message
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -87,9 +88,16 @@
                             <td>
                                 @using (Html.BeginForm("AddStock", "Pharmacy", FormMethod.Post, new { @class = "form-row" }))
                                 {
+                                    int min = 1;
+                                    int max = item.StockLeft;
+                                    if(item.ExpiryDate<(DateTime.Now.AddMonths(2)))
+                                    {
+                                        min = 2;
+                                        max = 5;
+                                    }
                                     <div class="col-5 text-right">Qty: </div>
                                     <div class="input-group col-6">
-                                        @Html.TextBox("Itemno", "2", new { @class = "form-control-sm col-sm-3", @type = "number", @min = "2" })
+                                        @Html.TextBox("Itemno", "2", new { @class = "form-control-sm col-sm-3", @type = "number", @min = min ,@max=max})
                                         @Html.Hidden("DrugId", @item.DrugId)
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Add To Pharmacy"><i class="fa fa-download"></i></button>
