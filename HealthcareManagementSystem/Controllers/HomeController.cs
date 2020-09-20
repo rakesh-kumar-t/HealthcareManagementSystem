@@ -53,7 +53,24 @@ namespace HealthcareManagementSystem.Controllers
                 db.Users.Add(admin);
                 db.SaveChanges();
             }
-            return View();
+            if (Session["Role"] != null)
+            {
+                string role = Session["Role"].ToString();
+                if (role == "Admin")
+                    return RedirectToAction("Index", "Admin");
+                else if (role == "Manager")
+                    return RedirectToAction("Index", "Pharmacy");
+                else if (role == "Nurse")
+                    return RedirectToAction("ViewPatient", "Home");
+                else if (role == "Pharmacy")
+                    return RedirectToAction("ViewPatient", "Home");
+                else if (role == "Reception")
+                    return RedirectToAction("ViewPatient", "Home");
+                else
+                    return View();
+            }
+            else
+                return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
