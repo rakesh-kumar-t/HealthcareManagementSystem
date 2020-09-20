@@ -29,10 +29,13 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager")
             {
-                ViewBag.Status = Session["Status"];
-                ViewBag.Message = Session["Message"];
-                Session["Status"] = "";
-                Session["Message"] = "";
+                if (Session["Status"] != null)
+                {
+                    ViewBag.Status = Session["Status"].ToString();
+                    ViewBag.Message = Session["Message"].ToString();
+                    Session["Status"] = null;
+                    Session["Message"] = null;
+                }
                 return View(db.DrugHouses.Where(d=>d.StockLeft>0).OrderBy(exp=>exp.ExpiryDate).ToList());
             }
             else
@@ -122,7 +125,7 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Manager"||Session["Role"].ToString() == "Admin")
             {
-                return View(db.Patients.ToList());
+                return View(db.Patients.OrderByDescending(o=>o.Date).ToList());
             }
             else
             {

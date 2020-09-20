@@ -244,7 +244,8 @@ namespace HealthcareManagementSystem.Controllers
                 if (ModelState.IsValid)
                 {
                     serve.Date = DateTime.Now;
-                    if(serve.Patients.Members.Type== "Student")
+                    var patients = db.Patients.Find(serve.PId);
+                    if (patients.Members.Type.Equals("Student"))
                     {
                         serve.Price = 0;
                     }
@@ -302,7 +303,8 @@ namespace HealthcareManagementSystem.Controllers
                     var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
                     pharm.Date = DateTime.Now;
                     pharm.Price = pharmastock.Price;
-                    if (pharm.Patients.Members.Type == "Student")
+                    var patients = db.Patients.Find(pharm.PId);
+                    if (patients.Members.Type.Equals("Student"))
                     {
                         pharm.Price = 0;
                     }

@@ -13,7 +13,7 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">
-                    Member Name
+                    Op Member Name
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.PatientName)
@@ -40,10 +40,10 @@
                 {
                 foreach (var medicine in item.Pharmacies)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Members.Name)
-                        </td>
+                <tr class="table-info">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Members.Name)
+                    </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PatientName)
                 </td>
@@ -59,35 +59,31 @@
                 <td>
                     @medicine.TotalAmount
                 </td>
-                        </tr>
+                </tr>
                 }
                 foreach (var service in item.Services)
                 {
-                    <tr>
-                 <td>
-                    @Html.DisplayFor(modelItem => item.Members.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientName)
-                </td>
-                <td>
-                    @service.TestName
-                </td>
-                <td>
-                    @service.Quantity
-                </td>
-                <td>
-                    @service.Price
-                </td>
-                <td>
-                    @service.Date.ToShortDateString()
-                </td>
-                <td>
-                    @service.TotalAmount
-                </td>
-</tr>
+                    <tr class="table-info">
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Members.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientName)
+                    </td>
+                    <td>
+                        @service.TestName
+                    </td>
+                    <td>
+                        @service.Quantity
+                    </td>
+                    <td>
+                        @service.Date.ToShortDateString()
+                    </td>
+                    <td>
+                        @service.TotalAmount
+                    </td>
+                    </tr>
                 }
-       
         }
 
             </tbody>
