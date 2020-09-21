@@ -223,12 +223,13 @@ textarea {
     max-width: 100%;
 }
 .container {
-    height:75vh;
-    width:50%;
+    height:90vh;
+    width:100%;
     background: rgba(0,0,0,.6);
     position:absolute;
-    top:50%;
+    top:60%;
     left:50%;
+    bottom:50%;
     transform:translate(-50%,-50%);
 }
 .img {
