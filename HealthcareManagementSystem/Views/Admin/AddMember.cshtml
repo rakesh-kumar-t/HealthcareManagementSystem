@@ -28,6 +28,20 @@
 
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Department)
+            @Html.DropDownListFor(model => model.Department, new List<SelectListItem>
+            {
+                new SelectListItem{Text="Onchology",Value="Onchology"},
+                new SelectListItem{Text="Cardiology",Value="Cardiology"},
+                new SelectListItem{Text="Gynaecology",Value="Gynaecology"},
+                new SelectListItem{Text="Psychology",Value="Psychology"},
+                new SelectListItem{Text="General surgery",Value="General surgery"},
+                new SelectListItem{Text="Dermatology",Value="Dermatology"},
+                new SelectListItem{Text="Pediatrics",Value="Pediatrics"},
+                new SelectListItem{Text="Anesthesiology",Value="Anesthesiology"},
+                new SelectListItem{Text="Neurology",Value="Neurology"},
+                new SelectListItem{Text="Radiology",Value="Radiology"},
+                new SelectListItem{Text="Nephrology",Value="Nephrology"},
+            }, "Select Gender", htmlAttributes: new { @class = "form-control" })
             @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
         </div>
