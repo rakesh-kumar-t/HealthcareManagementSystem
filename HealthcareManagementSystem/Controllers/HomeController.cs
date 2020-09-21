@@ -141,6 +141,11 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var patients = db.Patients.Find(pt.PId);
+                    if (patients.Members.Type.Equals("Student"))
+                    {
+                        pt.BillAmount = 0;
+                    }
                     pt.Date = DateTime.Now;
                     db.Patients.Add(pt);
                     db.SaveChanges();
@@ -256,6 +261,7 @@ namespace HealthcareManagementSystem.Controllers
                     patient.BillAmount += serve.TotalAmount;
                     db.Entry(patient).State =EntityState.Modified;
                     db.SaveChanges();
+                    ModelState.Clear();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New service added to patient successfully";
                 }
@@ -263,8 +269,9 @@ namespace HealthcareManagementSystem.Controllers
                 {
                     ViewBag.Status = "danger";
                     ViewBag.Message = "Insufficient details";
+                    return View(serve);
                 }
-                return View(serve);
+                return View();
             }
             else
                 return RedirectToAction("Index", "Home");
@@ -315,12 +322,19 @@ namespace HealthcareManagementSystem.Controllers
                     patient.BillAmount += pharm.TotalAmount;
                     db.Entry(patient).State=EntityState.Modified;
                     db.SaveChanges();
+                    ModelState.Clear();
                     ViewBag.Status = "success";
                     ViewBag.Message = "New medicine added to patient successfully";
                 }
+                else
+                {
+                    ViewBag.Status = "danger";
+                    ViewBag.Message = "Insufficient details";
+                    return View(pharm);
+                }
                 ViewBag.PatientList = db.Patients.ToList();
                 ViewBag.DrugList = db.Pharmastocks.ToList();
-                return View(pharm);
+                return View();
             }
             else
                 return RedirectToAction("Index", "Home");
