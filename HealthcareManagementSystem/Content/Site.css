@@ -227,9 +227,9 @@ textarea {
     width:100%;
     background: rgba(0,0,0,.6);
     position:absolute;
-    top:60%;
+    top:56%;
     left:50%;
-    bottom:50%;
+    bottom:30%;
     transform:translate(-50%,-50%);
 }
 .img {
