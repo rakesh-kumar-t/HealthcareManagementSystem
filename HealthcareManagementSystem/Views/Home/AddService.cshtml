@@ -34,14 +34,34 @@
 
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.TestName)
-            @Html.EditorFor(model => model.TestName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.TestName, new List<SelectListItem>
+            {
+                new SelectListItem{Text="X-Ray",Value="X-Ray"},
+                new SelectListItem{Text="MRI Scan",Value="MRI Scan"},
+                new SelectListItem{Text="Blood Test",Value="Blood Test"},
+                new SelectListItem{Text="Admit in Bed",Value="Admit in Bed"},
+                new SelectListItem{Text="CT Scan",Value="CT Scan"},
+                new SelectListItem{Text="Ultrasound",Value="Ultrasound"},
+                new SelectListItem{Text="OT",Value="OT"},
+                new SelectListItem{Text="Minor OT",Value="Minor OT"},
+                new SelectListItem{Text="Covid-19 Test",Value="Covid-19 Test"},
+                new SelectListItem{Text="Chemo",Value="Chemo"},
+                new SelectListItem{Text="Antibody test",Value="Antibody test"},
+                new SelectListItem{Text="Treadmill test",Value="Treadmill test"},
+                new SelectListItem{Text="Angiogram",Value="Angiogram"},
+                new SelectListItem{Text="Thyroid test",Value="Thyroid test"},
+                new SelectListItem{Text="Diabetes test",Value="Diabetes test"},
+                new SelectListItem{Text="EEG",Value="EEG"},
+                new SelectListItem{Text="EMG",Value="EMG"},
+                new SelectListItem{Text="ECG",Value="ECG"}
+            }, "Select A Service", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.TestName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Quantity)
-            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.Quantity,  new { @class = "form-control" ,@Value="1",@type="number"} )
             @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
         </div>
 
