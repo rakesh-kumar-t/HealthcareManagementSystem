@@ -10,7 +10,7 @@
         <button onclick="print()" class="btn btn-success fa fa-print mb-2">Print</button>
         </span>
 </div>
-<div class="card p-3" style="background-color:#bee5eb" id="section-to-print">
+<div class="card p-3 pre-scrollable" style="background-color:#bee5eb;min-height:100%" id="section-to-print">
     <div class="card-header text-left bg-info">
         <img src="~/Images/Logo.jpg" height="30px" style="border-radius:50%;border:2px solid white;" /> <span style="font-family: 'Righteous', cursive;">CLINIC RELIEF </span>
         <span style="float:right;">
@@ -119,3 +119,4 @@
     <p class="font-weight-bolder text-right mr-4 text-black-50">Grand Total : @Html.DisplayFor(model => model.BillAmount)</p>
     <p class="text-muted text-right small">(Total includes registration charges and doctor fee)</p>
 </div>
+<p class="mt-5"></p>
