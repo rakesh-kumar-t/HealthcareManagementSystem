@@ -92,8 +92,18 @@
                                     int max = item.StockLeft;
                                     if(item.ExpiryDate<(DateTime.Now.AddMonths(2)))
                                     {
+
                                         min = 2;
                                         max = 5;
+                                        if (item.StockLeft < 2)
+                                        {
+                                            min = item.StockLeft;
+                                            max = item.StockLeft;
+                                        }
+                                        if (item.StockLeft < 5)
+                                        {
+                                            max = item.StockLeft;
+                                        }
                                     }
                                     <div class="col-5 text-right">Qty: </div>
                                     <div class="input-group col-6">
