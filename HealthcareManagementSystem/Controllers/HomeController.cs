@@ -315,7 +315,7 @@ namespace HealthcareManagementSystem.Controllers
                 {
                     ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
                 }
-                ViewBag.DrugList = db.Pharmastocks.ToList();
+                ViewBag.DrugList = db.Pharmastocks.Where(product => product.Stockleft > 0).ToList();
                 if (id != null)
                 {
                     var patient = db.Patients.Find((int)id);
@@ -341,23 +341,32 @@ namespace HealthcareManagementSystem.Controllers
                 if (ModelState.IsValid)
                 {
                     var pharmastock = db.Pharmastocks.Find(pharm.PharmId);
-                    pharm.Date = DateTime.Now;
-                    pharm.Price = pharmastock.Price;
-                    var patients = db.Patients.Find(pharm.PId);
-                    if (patients.Members.Type.Equals("Student"))
+                    if (pharm.Quantity <= pharmastock.Stockleft)
                     {
-                        pharm.Price = 0;
+
+                        pharm.Date = DateTime.Now;
+                        pharm.Price = pharmastock.Price;
+                        var patients = db.Patients.Find(pharm.PId);
+                        if (patients.Members.Type.Equals("Student"))
+                        {
+                            pharm.Price = 0;
+                        }
+                        pharm.TotalAmount = pharm.Quantity * pharm.Price;
+                        db.Pharmacies.Add(pharm);
+                        db.SaveChanges();
+                        var patient = db.Patients.Find(pharm.PId);
+                        patient.BillAmount += pharm.TotalAmount;
+                        db.Entry(patient).State=EntityState.Modified;
+                        db.SaveChanges();
+                        ModelState.Clear();
+                        ViewBag.Status = "success";
+                        ViewBag.Message = "New medicine added to patient successfully";
                     }
-                    pharm.TotalAmount = pharm.Quantity * pharm.Price;
-                    db.Pharmacies.Add(pharm);
-                    db.SaveChanges();
-                    var patient = db.Patients.Find(pharm.PId);
-                    patient.BillAmount += pharm.TotalAmount;
-                    db.Entry(patient).State=EntityState.Modified;
-                    db.SaveChanges();
-                    ModelState.Clear();
-                    ViewBag.Status = "success";
-                    ViewBag.Message = "New medicine added to patient successfully";
+                    else
+                    {
+                        ViewBag.Status = "danger";
+                        ViewBag.Message = "There are only "+pharmastock.Stockleft+" "+pharmastock.DrugHouses.Name +"(s) Available in Pharmacy";
+                    }
                 }
                 else
                 {
@@ -377,7 +386,7 @@ namespace HealthcareManagementSystem.Controllers
                 {
                     ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
                 }
-                ViewBag.DrugList = db.Pharmastocks.ToList();
+                ViewBag.DrugList = db.Pharmastocks.Where(product=>product.Stockleft>0).ToList();
                 return View();
             }
             else
