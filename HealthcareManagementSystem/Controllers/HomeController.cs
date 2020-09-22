@@ -141,8 +141,8 @@ namespace HealthcareManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var patients = db.Patients.Find(pt.PId);
-                    if (patients.Members.Type.Equals("Student"))
+                    var members = db.Members.Find(pt.Opno);
+                    if (members.Type.Equals("Student"))
                     {
                         pt.BillAmount = 0;
                     }
