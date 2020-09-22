@@ -358,6 +358,9 @@ namespace HealthcareManagementSystem.Controllers
                         patient.BillAmount += pharm.TotalAmount;
                         db.Entry(patient).State=EntityState.Modified;
                         db.SaveChanges();
+                        pharmastock.Stockleft -= pharm.Quantity;
+                        db.Entry(pharmastock).State = EntityState.Modified;
+                        db.SaveChanges();
                         ModelState.Clear();
                         ViewBag.Status = "success";
                         ViewBag.Message = "New medicine added to patient successfully";
