@@ -61,9 +61,9 @@
                 foreach (var service in item.Services)
                 {
                     <tr class="table-info">
-                     <td>
-                        @Html.DisplayFor(modelItem => item.Members.Name)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Members.Name) (@Html.DisplayFor(modelItem => item.Members.Type))
+                        </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PatientName)
                     </td>
