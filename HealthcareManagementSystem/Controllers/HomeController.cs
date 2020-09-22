@@ -221,7 +221,18 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"] != null && (Session["Role"].ToString() == "Reception" || Session["Role"].ToString() == "Nurse" ))
             {
-                ViewBag.PatientList = db.Patients.ToList();
+                if (Session["Role"].ToString() == "Nurse")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person=>person.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else
+                {
+                    ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
+                }
                 if (id != null)
                 {
                     var patient = db.Patients.Find((int)id);
@@ -245,7 +256,18 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Reception")
             {
-                ViewBag.PatientList = db.Patients.ToList();
+                if (Session["Role"].ToString() == "Nurse")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else
+                {
+                    ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
+                }
                 if (ModelState.IsValid)
                 {
                     serve.Date = DateTime.Now;
@@ -281,7 +303,18 @@ namespace HealthcareManagementSystem.Controllers
         {
             if (Session["UserId"]!=null&&(Session["Role"].ToString() == "Nurse" || Session["Role"].ToString() == "Pharmacy" || Session["Role"].ToString() == "Reception"))
             {
-                ViewBag.PatientList = db.Patients.ToList();
+                if (Session["Role"].ToString() == "Nurse")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else
+                {
+                    ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
+                }
                 ViewBag.DrugList = db.Pharmastocks.ToList();
                 if (id != null)
                 {
@@ -332,7 +365,18 @@ namespace HealthcareManagementSystem.Controllers
                     ViewBag.Message = "Insufficient details";
                     return View(pharm);
                 }
-                ViewBag.PatientList = db.Patients.ToList();
+                if (Session["Role"].ToString() == "Nurse")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("InPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else if (Session["Role"].ToString() == "Pharmacy")
+                {
+                    ViewBag.PatientList = db.Patients.Where(person => person.Type.Equals("OutPatient")).OrderByDescending(o => o.Date).ToList();
+                }
+                else
+                {
+                    ViewBag.PatientList = db.Patients.OrderByDescending(o => o.Date).ToList();
+                }
                 ViewBag.DrugList = db.Pharmastocks.ToList();
                 return View();
             }
