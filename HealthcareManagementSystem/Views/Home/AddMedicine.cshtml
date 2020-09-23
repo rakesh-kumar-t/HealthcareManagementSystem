@@ -34,7 +34,7 @@
 
 
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.PharmId, "PharmId")
+            @Html.LabelFor(model => model.PharmId, "Medicine Name")
             @Html.DropDownListFor(model => model.PharmId, new SelectList(ViewBag.DrugList, "PharmId", "DrugHouses.Name"), "Select a medicine", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.PharmId, "", new { @class = "text-danger" })
         </div>
