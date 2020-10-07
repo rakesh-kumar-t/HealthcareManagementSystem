@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Data.Entity;
 
-
+//Home Page for all users
 namespace HealthcareManagementSystem.Controllers
 {
     public class HomeController : Controller
@@ -119,7 +119,7 @@ namespace HealthcareManagementSystem.Controllers
         }
 
         
-        //NewPatient 
+        //New Patient data 
         [Authorize]
         public ActionResult NewPatient()
         {
@@ -193,7 +193,7 @@ namespace HealthcareManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        //PatientDetails method
+        //Method about patient details
         [Authorize]
         public ActionResult PatientDetails(int? id)
         {
